@@ -1,0 +1,13 @@
+<h1 class="h1">Llistat d'articles</h1>
+<h2 class="h2">
+  <span *ngIf="(isUpdating$ | async)">Updating</span>
+  <span *ngIf="!(isUpdating$  | async)">Updated</span>
+</h2>
+<div class="table">
+
+  <div class="item" *ngFor="let item of articles$ | async">
+    <span>{{item.id}}</span>
+    <span>{{item.title}}</span>
+    <span>{{item.short_description}}</span>
+  </div>
+</div>
