@@ -5,7 +5,8 @@ import { ArticlesFormComponent } from './containers/articles-form/articles-form.
 
 
 const routes: Routes = [
-    { path: ':id', component: ArticlesFormComponent },
+    { path: 'new', component: ArticlesFormComponent },
+    { path: 'edit/:id', component: ArticlesFormComponent },
     { path: '', component: ArticlesListComponent },
 ];
 

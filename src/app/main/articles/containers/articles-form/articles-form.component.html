@@ -1,6 +1,6 @@
 <div class="page">
   <mat-card>
-    <form *ngIf="article$ | async" [formGroup]="form">
+    <form *ngIf="article$ | async" [formGroup]="form" (ngSubmit)="onSubmit()">
       <mat-card-title>Edició Article</mat-card-title>
       <mat-card-content>
         <!--<mat-form-field class="form__field-container">
@@ -15,6 +15,21 @@
         <mat-form-field class="form__field-container">
           <textarea matInput placeholder="Contingut" id="description" formControlName="description"></textarea>
         </mat-form-field>
+        <mat-form-field class="form__field-container">
+          <input matInput [matDatepicker]="created_on" placeholder="Data d'inserció">
+          <mat-datepicker-toggle matSuffix [for]="created_on"></mat-datepicker-toggle>
+          <mat-datepicker #created_on></mat-datepicker>
+        </mat-form-field>
+        <div class="form__field-container">
+          <mat-checkbox matInput formControlName="active">Actiu</mat-checkbox>
+        </div>
+        <mat-form-field class="form__field-container">
+          <input matInput placeholder="Slug" id="slug" formControlName="slug">
+        </mat-form-field>
+        <div class="button-wrapper button-wrapper--right">
+          <button mat-flat-button color="primary">Guardar</button>
+          <button mat-flat-button color="warn" (click)="onCancel()">Cancelar</button>
+        </div>
       </mat-card-content>
     </form>
   </mat-card>

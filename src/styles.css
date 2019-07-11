@@ -1,14 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-*{
-  color: #424242;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
-}
-
 body{
   padding: 0;
   margin: 0;
+  color: #424242;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
 }
 
 .page{
@@ -20,7 +17,7 @@ body{
   content: '';
   position: absolute;
   z-index: -1;
-  background: #3F51B5;
+  background: #c5cae9;
   height: 150px;
   width: 100%;
 }
@@ -33,6 +30,17 @@ body{
 
 .form__field-container{
   width: 100%;
+}
+
+.button-wrapper{
+  display: flex;
+  margin: 0 -8px;
+} 
+.button-wrapper > button, .button-wrapper > a{
+  margin: 0 8px;
+}
+.button-wrapper.button-wrapper--right{
+  justify-content: flex-end;
 }
 
 .page .mat-card{

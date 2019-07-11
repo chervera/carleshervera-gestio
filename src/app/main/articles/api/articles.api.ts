@@ -20,4 +20,8 @@ export class ArticlesApi {
   getArticle(id: number): Observable<Article> {
     return this.http.get<Article>(this.API + '/' + id);
   }
+
+  create(article: Article): Observable<Article> {
+    return this.http.post<Article>(this.API, article);
+  }
 }

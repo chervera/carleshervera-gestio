@@ -47,4 +47,22 @@ export class ArticlesFacade {
       })
     ).subscribe();
   }
+
+  addArticle() {
+    this.articlesState.setArticle(new Article(new Date()));
+  }
+
+  saveNewArticle(article: Article) {
+    this.articlesState.setUpdating(true);
+    this.articlesApi.create(article).pipe(
+      tap((article: Article) => {
+        this.articlesState.setArticle(article);
+        this.articlesState.setUpdating(false);
+      })
+    ).subscribe();
+  }
+
+  saveUpdateArticle() {
+
+  }
 }

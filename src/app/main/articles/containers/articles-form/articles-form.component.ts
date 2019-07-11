@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../../models/article';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ArticlesFacade } from '../../articles.facade';
@@ -22,6 +22,7 @@ export class ArticlesFormComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private articlesFacade: ArticlesFacade,
     private formBuilder: FormBuilder,
   ) {
@@ -53,14 +54,39 @@ export class ArticlesFormComponent implements OnInit {
   }
 
   newArticle() {
+    this.articlesFacade.addArticle();
+  }
 
+  saveNewArticle() {
+    this.articlesFacade.saveNewArticle(this.getEditedArticle());
+  }
+
+  onSubmit() {
+    let article: Article = this.form.value;
+    if (article.id) {
+      //this.updateArticle();
+    } else {
+      this.saveNewArticle();
+    }
+  }
+
+  onCancel() {
+    this.router.navigate(['articles']);
   }
 
   private buildForm() {
     return this.formBuilder.group({
       title: ['', Validators.required],
       short_description: ['', Validators.required],
+      description: [''],
+      created_on: [''],
+      active: [''],
+      slug: ['', Validators.required],
     });
+  }
+
+  private getEditedArticle(): Article {
+    return this.form.value;
   }
 
 }

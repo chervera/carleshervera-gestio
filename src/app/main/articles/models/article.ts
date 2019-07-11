@@ -6,4 +6,8 @@ export class Article {
   created_on: Date;
   active: boolean;
   slug: string;
+
+  constructor(createdOn: Date) {
+    this.created_on = createdOn;
+  }
 }

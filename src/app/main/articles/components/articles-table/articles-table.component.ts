@@ -21,8 +21,8 @@ export class ArticlesTableComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
 
-  private displayedColumns: string[] = ['id', 'title', 'short_description', 'actions'];
-  private dataSource: ArticlesDataSource;
+  displayedColumns: string[] = ['id', 'title', 'short_description', 'actions'];
+  dataSource: ArticlesDataSource;
 
   constructor(private articlesFacade: ArticlesFacade) { }
 
@@ -36,7 +36,7 @@ export class ArticlesTableComponent implements OnInit {
     this.edit.emit(id);
   }
 
-  onEelete(id: number) {
+  onDelete(id: number) {
     this.delete.emit(id);
   }
 

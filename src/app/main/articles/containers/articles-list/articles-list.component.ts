@@ -27,12 +27,12 @@ export class ArticlesListComponent implements OnInit {
     this.articlesFacade.loadArticles();
   }
 
-  addArticle(article: Article) {
-    //this.articlesFacade.addArticle(article);
+  onAdd() {
+    this.router.navigate(['articles/new']);
   }
 
   editArticle(id: number) {
-    this.router.navigate(['articles', id]);
+    this.router.navigate(['articles/edit', id]);
   }
 
 }
