@@ -27,11 +27,24 @@ export class ArticlesFacade {
     this.articlesState.setUpdating(true);
     this.articlesApi.getArticles()
       .pipe(
-        tap(articles => console.log(articles)),
         tap(articles => {
           this.articlesState.setArticles(articles);
           this.articlesState.setUpdating(false);
         })
       ).subscribe();
+  }
+
+  getArticle$(): Observable<Article> {
+    return this.articlesState.getArticle$();
+  }
+
+  loadArticle(id: number) {
+    this.articlesState.setUpdating(true);
+    this.articlesApi.getArticle(id).pipe(
+      tap((article: Article) => {
+        this.articlesState.setArticle(article);
+        this.articlesState.setUpdating(false);
+      })
+    ).subscribe();
   }
 }

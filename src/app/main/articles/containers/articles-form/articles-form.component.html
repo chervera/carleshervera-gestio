@@ -1,0 +1,21 @@
+<div class="page">
+  <mat-card>
+    <form *ngIf="article$ | async" [formGroup]="form">
+      <mat-card-title>Edició Article</mat-card-title>
+      <mat-card-content>
+        <!--<mat-form-field class="form__field-container">
+          <input matInput placeholder="ID.">
+        </mat-form-field>-->
+        <mat-form-field class="form__field-container">
+          <input matInput placeholder="Títol" id="title" formControlName="title">
+        </mat-form-field>
+        <mat-form-field class="form__field-container">
+          <input matInput placeholder="Descripció curta" id="short_description" formControlName="short_description">
+        </mat-form-field>
+        <mat-form-field class="form__field-container">
+          <textarea matInput placeholder="Contingut" id="description" formControlName="description"></textarea>
+        </mat-form-field>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

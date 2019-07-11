@@ -9,6 +9,7 @@ export class ArticlesState {
 
   private updating$ = new BehaviorSubject<boolean>(false);
   private articles$ = new BehaviorSubject<Article[]>(null);
+  private article$ = new BehaviorSubject<Article>(null);
 
   constructor() { }
 
@@ -26,6 +27,14 @@ export class ArticlesState {
 
   setArticles(articles: Article[]) {
     this.articles$.next(articles);
+  }
+
+  getArticle$() {
+    return this.article$.asObservable();
+  }
+
+  setArticle(article: Article) {
+    this.article$.next(article);
   }
 
 
