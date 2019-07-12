@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Article } from '../../models/article';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -6,10 +6,13 @@ import { ArticlesDataSource } from './articles.data-source';
 import { Observable } from 'rxjs';
 import { ArticlesFacade } from '../../articles.facade';
 
+
 @Component({
   selector: 'app-articles-table',
   templateUrl: './articles-table.component.html',
-  styleUrls: ['./articles-table.component.css']
+  styleUrls: ['./articles-table.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class ArticlesTableComponent implements OnInit {
 

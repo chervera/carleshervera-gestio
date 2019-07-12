@@ -7,9 +7,14 @@ import { Article } from '../models/article';
 })
 export class ArticlesState {
 
+  readonly NOT_COMPLETED = null;
+
   private updating$ = new BehaviorSubject<boolean>(false);
+  private completed$ = new BehaviorSubject<string>(this.NOT_COMPLETED);
   private articles$ = new BehaviorSubject<Article[]>(null);
   private article$ = new BehaviorSubject<Article>(null);
+
+  private selectedId: number;
 
   constructor() { }
 
@@ -20,6 +25,19 @@ export class ArticlesState {
   setUpdating(isUpdating: boolean) {
     this.updating$.next(isUpdating);
   }
+
+  isCompleted$() {
+    return this.completed$.asObservable();
+  }
+
+  setCompleted(message: string) {
+    this.completed$.next(message);
+  }
+
+  setErrorCompleted(error: Error) {
+    this.completed$.error(error);
+  }
+
 
   getArticles$() {
     return this.articles$.asObservable();
@@ -37,5 +55,12 @@ export class ArticlesState {
     this.article$.next(article);
   }
 
+  setSelectedId(id: number) {
+    this.selectedId = id;
+  }
+
+  getSelectedId(): number {
+    return this.selectedId;
+  }
 
 }

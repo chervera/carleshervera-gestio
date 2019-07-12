@@ -1,13 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ArticlesFacade } from '../../articles.facade';
 import { Observable } from 'rxjs';
 import { Article } from '../../models/article';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-articles',
   templateUrl: './articles-list.component.html',
-  styleUrls: ['./articles-list.component.css']
+  styleUrls: ['./articles-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticlesListComponent implements OnInit {
 
@@ -34,5 +36,10 @@ export class ArticlesListComponent implements OnInit {
   editArticle(id: number) {
     this.router.navigate(['articles/edit', id]);
   }
+
+  deleteArticle(id: number) {
+    this.articlesFacade.deleteArticle(id);
+  }
+
 
 }

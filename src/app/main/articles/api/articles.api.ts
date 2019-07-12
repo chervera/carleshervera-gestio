@@ -24,4 +24,12 @@ export class ArticlesApi {
   create(article: Article): Observable<Article> {
     return this.http.post<Article>(this.API, article);
   }
+
+  update(article: Article): Observable<Article> {
+    return this.http.put<Article>(this.API, article);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(this.API + '/' + id);
+  }
 }
