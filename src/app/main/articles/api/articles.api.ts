@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { Article } from '../models/article';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Sort } from '@angular/material/sort';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,10 @@ export class ArticlesApi {
 
   constructor(private http: HttpClient) { }
 
-  getArticles(): Observable<Article[]> {
-    return this.http.get<Article[]>(this.API);
+  getArticles(sort?: Sort): Observable<Article[]> {
+    const options = sort ?
+      { params: new HttpParams().set('sort', sort.active).set('direction', sort.direction) } : {};
+    return this.http.get<Article[]>(this.API, options);
   }
 
   getArticle(id: number): Observable<Article> {

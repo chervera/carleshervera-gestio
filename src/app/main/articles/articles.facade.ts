@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Article } from './models/article';
 import { tap } from 'rxjs/operators';
 import { CoreState } from 'src/app/core/state/core.state';
+import { Sort } from '@angular/material/sort';
+import { PageEvent } from '@angular/material/paginator';
 
 
 @Injectable({
@@ -41,7 +43,7 @@ export class ArticlesFacade {
 
   loadArticles() {
     this.state.articles.setUpdating(true);
-    this.articlesApi.getArticles()
+    this.articlesApi.getArticles(this.state.articles.getSort$().value)
       .pipe(
         tap(articles => {
           this.state.articles.setArticles(articles);
@@ -53,8 +55,6 @@ export class ArticlesFacade {
   getArticle$(): Observable<Article> {
     return this.state.articles.getArticle$();
   }
-
-
 
   loadArticle(id: number) {
     this.state.articles.setUpdating(true);
@@ -109,5 +109,15 @@ export class ArticlesFacade {
       () => this.loadArticles(),
       (error) => console.error(error)
     )
+  }
+
+  setSort(sort: Sort) {
+    this.state.articles.setSort(sort);
+    this.loadArticles();
+  }
+
+  setPage(page: PageEvent) {
+    this.state.articles.setPage(page);
+    this.loadArticles();
   }
 }

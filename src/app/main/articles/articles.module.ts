@@ -14,10 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
-
-
-
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -38,7 +36,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatDatepickerModule,
     MatCheckboxModule,
-    MatButtonModule
+    MatButtonModule,
+    MatPaginatorModule,
+    MatSortModule
   ]
 })
 export class ArticlesModule { }

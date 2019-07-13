@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Article } from '../../models/article';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ArticlesDataSource } from './articles.data-source';
 import { Observable } from 'rxjs';
 import { ArticlesFacade } from '../../articles.facade';
+import { MatSort, Sort } from '@angular/material/sort';
 
 
 @Component({
@@ -16,23 +16,24 @@ import { ArticlesFacade } from '../../articles.facade';
 })
 export class ArticlesTableComponent implements OnInit {
 
-  @Input() private items$: Observable<Article[]>;
-
   @Output() edit = new EventEmitter<number>();
   @Output() delete = new EventEmitter<number>();
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
 
   displayedColumns: string[] = ['id', 'title', 'short_description', 'actions'];
   dataSource: ArticlesDataSource;
 
-  constructor(private articlesFacade: ArticlesFacade) { }
+  constructor(
+    private articlesFacade: ArticlesFacade
+  ) { }
 
   ngOnInit() {
     //this.dataSource.paginator = this.paginator;
-    this.dataSource = new ArticlesDataSource(this.articlesFacade);
-    this.dataSource.loadArticles();
+    this.dataSource = new ArticlesDataSource(this.articlesFacade.getArticles$());
+    this.articlesFacade.loadArticles();
   }
 
   onEdit(id: number) {
@@ -41,6 +42,14 @@ export class ArticlesTableComponent implements OnInit {
 
   onDelete(id: number) {
     this.delete.emit(id);
+  }
+
+  onSort(sort: Sort) {
+    this.articlesFacade.setSort(sort);
+  }
+
+  onPaginate(page: PageEvent) {
+    this.articlesFacade.setPage(page);
   }
 
 }

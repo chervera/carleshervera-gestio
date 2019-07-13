@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 })
 export class ArticlesListComponent implements OnInit {
 
-
   articles$: Observable<Article[]>;
   isUpdating$: Observable<boolean>;
 
