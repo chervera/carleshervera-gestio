@@ -16,6 +16,7 @@ export class ArticlesState {
   private updating$ = new BehaviorSubject<boolean>(false);
   private completed$ = new BehaviorSubject<string>(this.NOT_COMPLETED);
   private articles$ = new BehaviorSubject<Article[]>(null);
+  private totalArticles$ = new BehaviorSubject<number>(0);
   private article$ = new BehaviorSubject<Article>(null);
   private sort$ = new BehaviorSubject<Sort>(null);
   private page$ = new BehaviorSubject<PageEvent>(this.INIT_PAGE);
@@ -47,6 +48,14 @@ export class ArticlesState {
 
   setSort(sort: Sort) {
     this.sort$.next(sort);
+  }
+
+  getTotalArticles$() {
+    return this.totalArticles$;
+  }
+
+  setTotalArticles(total: number) {
+    this.totalArticles$.next(total);
   }
 
   getPage$() {

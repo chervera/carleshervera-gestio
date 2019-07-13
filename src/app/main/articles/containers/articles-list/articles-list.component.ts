@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class ArticlesListComponent implements OnInit {
 
   articles$: Observable<Article[]>;
+  totalArticles$: Observable<number>;
   isUpdating$: Observable<boolean>;
 
   constructor(
@@ -22,6 +23,7 @@ export class ArticlesListComponent implements OnInit {
   ) {
     this.isUpdating$ = articlesFacade.isUpdating$();
     this.articles$ = articlesFacade.getArticles$();
+    this.totalArticles$ = articlesFacade.getTotalArticles$();
   }
 
   ngOnInit() {

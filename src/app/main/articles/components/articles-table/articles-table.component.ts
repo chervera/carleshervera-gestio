@@ -31,7 +31,6 @@ export class ArticlesTableComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.dataSource.paginator = this.paginator;
     this.dataSource = new ArticlesDataSource(this.articlesFacade.getArticles$());
     this.articlesFacade.loadArticles();
   }

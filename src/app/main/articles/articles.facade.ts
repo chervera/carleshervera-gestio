@@ -3,10 +3,11 @@ import { ArticlesApi } from './api/articles.api';
 import { ArticlesState } from './state/articles.state';
 import { Observable } from 'rxjs';
 import { Article } from './models/article';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { CoreState } from 'src/app/core/state/core.state';
 import { Sort } from '@angular/material/sort';
 import { PageEvent } from '@angular/material/paginator';
+import { HttpResponse } from '@angular/common/http';
 
 
 @Injectable({
@@ -41,12 +42,17 @@ export class ArticlesFacade {
     return this.state.articles.getArticles$();
   }
 
+  getTotalArticles$(){
+    return this.state.articles.getTotalArticles$();
+  }
+
   loadArticles() {
     this.state.articles.setUpdating(true);
-    this.articlesApi.getArticles(this.state.articles.getSort$().value)
+    this.articlesApi.getArticles(this.state.articles.getPage$().value, this.state.articles.getSort$().value )
       .pipe(
-        tap(articles => {
-          this.state.articles.setArticles(articles);
+        map((response: HttpResponse<Article[]>) => {
+          this.state.articles.setArticles(response.body);
+          this.state.articles.setTotalArticles(+response.headers.get(this.articlesApi.HEADER_TOTAL_ITEMS));
           this.state.articles.setUpdating(false);
         })
       ).subscribe();
@@ -75,8 +81,8 @@ export class ArticlesFacade {
     this.state.articles.setCompleted(null);
     this.articlesApi.create(article).subscribe(
       () => {
-        this.state.articles.setArticle(article)
-        this.state.articles.setCompleted("Article afegit correctament");
+        this.state.articles.setArticle(article);
+        this.state.articles.setCompleted('Article afegit correctament');
       },
       (error) => console.error(error),
       () => this.state.articles.setUpdating(false)
@@ -88,8 +94,8 @@ export class ArticlesFacade {
 
     this.articlesApi.update(article).subscribe(
       () => {
-        this.state.articles.setArticle(article)
-        this.state.articles.setCompleted("Article modificat correctament");
+        this.state.articles.setArticle(article);
+        this.state.articles.setCompleted('Article modificat correctament');
       },
       (error) => console.error(error),
       () => this.state.articles.setUpdating(false)
@@ -108,7 +114,7 @@ export class ArticlesFacade {
     this.articlesApi.delete(id).subscribe(
       () => this.loadArticles(),
       (error) => console.error(error)
-    )
+    );
   }
 
   setSort(sort: Sort) {
