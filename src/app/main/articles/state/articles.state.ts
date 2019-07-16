@@ -1,29 +1,32 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Article } from '../models/article';
-import { Sort } from '@angular/material/sort';
-import { PageEvent } from '@angular/material/paginator';
+import { State } from 'src/app/core/state/state';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ArticlesState {
+export class ArticlesState extends State {
 
   readonly NOT_COMPLETED = null;
-  readonly INIT_PAGE = new PageEvent();
-
+  readonly INIT_PAGE = 0;
+  readonly DEFAULT_PAGE_SIZE = 0;
 
   private updating$ = new BehaviorSubject<boolean>(false);
   private completed$ = new BehaviorSubject<string>(this.NOT_COMPLETED);
   private articles$ = new BehaviorSubject<Article[]>(null);
   private totalArticles$ = new BehaviorSubject<number>(0);
   private article$ = new BehaviorSubject<Article>(null);
-  private sort$ = new BehaviorSubject<Sort>(null);
-  private page$ = new BehaviorSubject<PageEvent>(this.INIT_PAGE);
+  private sortField$ = new BehaviorSubject<string>(null);
+  private sortDirection$ = new BehaviorSubject<string>(null);
+  private page$ = new BehaviorSubject<number>(this.INIT_PAGE);
+  private pageSize$ = new BehaviorSubject<number>(this.DEFAULT_PAGE_SIZE);
 
   private selectedId: number;
 
-  constructor() { }
+  constructor() {
+    super();
+  }
 
   isUpdating$() {
     return this.updating$.asObservable();
@@ -42,12 +45,20 @@ export class ArticlesState {
   }
 
 
-  getSort$() {
-    return this.sort$;
+  getSortField$() {
+    return this.sortField$;
   }
 
-  setSort(sort: Sort) {
-    this.sort$.next(sort);
+  setSortField(field: string) {
+    this.sortField$.next(field);
+  }
+
+  getSortDirection$() {
+    return this.sortDirection$;
+  }
+
+  setSortDirection(direction: string) {
+    this.sortDirection$.next(direction);
   }
 
   getTotalArticles$() {
@@ -62,8 +73,16 @@ export class ArticlesState {
     return this.page$;
   }
 
-  setPage(page: PageEvent) {
+  setPage(page: number) {
     this.page$.next(page);
+  }
+
+  getPageSize$() {
+    return this.pageSize$;
+  }
+
+  setPageSize(pageSize: number) {
+    this.pageSize$.next(pageSize);
   }
 
   setErrorCompleted(error: Error) {

@@ -5,7 +5,8 @@
       <button mat-flat-button color="primary" (click)="onAdd()">Afegir</button>
     </div>
     <div class="table">
-      <app-articles-table (edit)="editArticle($event)" (delete)="deleteArticle($event)">
+      <app-articles-table [dataSource]="dataSource" (edit)="editArticle($event)" (delete)="deleteArticle($event)"
+        (sort)="onSort($event)" (paginate)="onPaginate($event)">
       </app-articles-table>
     </div>
   </mat-card>

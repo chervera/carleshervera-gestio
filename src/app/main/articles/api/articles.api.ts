@@ -16,8 +16,12 @@ export class ArticlesApi {
 
   constructor(private http: HttpClient) { }
 
-  getArticles(page?: PageEvent, sort?: Sort): Observable<HttpResponse<Article[]>> {
-    const queryParams = sort ? new HttpParams().set('sort', sort.active).set('direction', sort.direction) : null;
+  getArticles(page: number = 0, pageSize: number = 10, sortField: string = '', sortDirection: string = ''): Observable<HttpResponse<Article[]>> {
+    const queryParams = new HttpParams()
+      .set('_page', page.toString())
+      .set('_rows', pageSize.toString())
+    //.set('sort', sortField)
+    //.set('direction', sortDirection);
     const options = {
       observe: 'response' as 'body',
       params: queryParams

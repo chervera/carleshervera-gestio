@@ -23,7 +23,6 @@ export class ArticlesDataSource extends DataSource<Article> {
   }
 
   disconnect(collectionViewer: CollectionViewer): void {
-
   }
 
 }

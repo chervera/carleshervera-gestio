@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ArticlesApi } from './api/articles.api';
-import { ArticlesState } from './state/articles.state';
 import { Observable } from 'rxjs';
 import { Article } from './models/article';
-import { tap, map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { CoreState } from 'src/app/core/state/core.state';
-import { Sort } from '@angular/material/sort';
-import { PageEvent } from '@angular/material/paginator';
 import { HttpResponse } from '@angular/common/http';
 
 
@@ -42,16 +39,17 @@ export class ArticlesFacade {
     return this.state.articles.getArticles$();
   }
 
-  getTotalArticles$(){
+  getTotalArticles$() {
     return this.state.articles.getTotalArticles$();
   }
 
   loadArticles() {
     this.state.articles.setUpdating(true);
-    this.articlesApi.getArticles(this.state.articles.getPage$().value, this.state.articles.getSort$().value )
+    this.articlesApi.getArticles(this.state.articles.getPage$().value, this.state.articles.getPageSize$().value, this.state.articles.getSortField$().value, this.state.articles.getSortDirection$().value)
       .pipe(
-        map((response: HttpResponse<Article[]>) => {
+        tap((response: HttpResponse<Article[]>) => {
           this.state.articles.setArticles(response.body);
+          console.log(response.headers.keys());
           this.state.articles.setTotalArticles(+response.headers.get(this.articlesApi.HEADER_TOTAL_ITEMS));
           this.state.articles.setUpdating(false);
         })
@@ -117,13 +115,24 @@ export class ArticlesFacade {
     );
   }
 
-  setSort(sort: Sort) {
-    this.state.articles.setSort(sort);
-    this.loadArticles();
+  setSortField(sortField: string) {
+    this.state.articles.setSortField(sortField);
   }
 
-  setPage(page: PageEvent) {
+  setSortDirection(direction: string) {
+    this.state.articles.setSortDirection(direction);
+
+  }
+
+  setPage(page: number) {
     this.state.articles.setPage(page);
-    this.loadArticles();
+  }
+
+  setInitPage() {
+    this.setPage(this.state.articles.INIT_PAGE);
+  }
+
+  setPageSize(pageSize: number) {
+    this.state.articles.setPageSize(pageSize);
   }
 }

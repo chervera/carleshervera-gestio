@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { ArticlesState } from 'src/app/main/articles/state/articles.state';
+import { State } from './state';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CoreState {
+export class CoreState extends State {
 
-  constructor() { }
+  constructor() {
+    super();
+  }
 
   articles: ArticlesState = new ArticlesState();
+
+  printGlobalState() {
+    let globalState = this.printState();
+    console.log(globalState);
+  }
 
 }
