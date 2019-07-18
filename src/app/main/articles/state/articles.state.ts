@@ -12,15 +12,15 @@ export class ArticlesState extends State {
   readonly INIT_PAGE = 0;
   readonly DEFAULT_PAGE_SIZE = 0;
 
-  private updating$ = new BehaviorSubject<boolean>(false);
-  private completed$ = new BehaviorSubject<string>(this.NOT_COMPLETED);
-  private articles$ = new BehaviorSubject<Article[]>(null);
-  private totalArticles$ = new BehaviorSubject<number>(0);
-  private article$ = new BehaviorSubject<Article>(null);
-  private sortField$ = new BehaviorSubject<string>(null);
-  private sortDirection$ = new BehaviorSubject<string>(null);
-  private page$ = new BehaviorSubject<number>(this.INIT_PAGE);
-  private pageSize$ = new BehaviorSubject<number>(this.DEFAULT_PAGE_SIZE);
+  private readonly updating$ = new BehaviorSubject<boolean>(false);
+  private readonly completed$ = new BehaviorSubject<string>(this.NOT_COMPLETED);
+  private readonly articles$ = new BehaviorSubject<Article[]>(null);
+  private readonly totalArticles$ = new BehaviorSubject<number>(0);
+  private readonly article$ = new BehaviorSubject<Article>(null);
+  private readonly sortField$ = new BehaviorSubject<string>(null);
+  private readonly sortDirection$ = new BehaviorSubject<string>(null);
+  private readonly page$ = new BehaviorSubject<number>(this.INIT_PAGE);
+  private readonly pageSize$ = new BehaviorSubject<number>(this.DEFAULT_PAGE_SIZE);
 
   private selectedId: number;
 
@@ -43,7 +43,6 @@ export class ArticlesState extends State {
   setCompleted(message: string) {
     this.completed$.next(message);
   }
-
 
   getSortField$() {
     return this.sortField$;

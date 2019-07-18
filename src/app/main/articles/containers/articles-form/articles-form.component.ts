@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Article } from '../../models/article';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap, map, tap, filter } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ArticlesFacade } from '../../articles.facade';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';

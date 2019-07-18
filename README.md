@@ -25,3 +25,23 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Based on:
+
+https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-and-rxjs-41p8
+
+https://material.angular.io/
+
+
+## Arquitecture
+
+## TODO:
+
+
+1. - The JWT authentication
+1. - A HTML layout
+  1. - Bootstrap 4
+  1. - Icon font
+1. - Convert state into inmutable state
+1. - Finish and add the module generation schematics.
+1. - Example test

@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { MatNativeDateModule } from '@angular/material/core';
+import { State } from './core/state/state';
 
 
 @NgModule({
@@ -25,7 +26,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     BrowserAnimationsModule,
     MatNativeDateModule
   ],
-  providers: [],
+  providers: [
+    State
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

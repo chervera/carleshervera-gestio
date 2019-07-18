@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ArticlesApi } from './api/articles.api';
 import { Observable } from 'rxjs';
 import { Article } from './models/article';
-import { tap } from 'rxjs/operators';
+import { tap, take } from 'rxjs/operators';
 import { CoreState } from 'src/app/core/state/core.state';
 import { HttpResponse } from '@angular/common/http';
 
@@ -47,6 +47,7 @@ export class ArticlesFacade {
     this.state.articles.setUpdating(true);
     this.articlesApi.getArticles(this.state.articles.getPage$().value, this.state.articles.getPageSize$().value, this.state.articles.getSortField$().value, this.state.articles.getSortDirection$().value)
       .pipe(
+        take(1),
         tap((response: HttpResponse<Article[]>) => {
           this.state.articles.setArticles(response.body);
           console.log(response.headers.keys());
