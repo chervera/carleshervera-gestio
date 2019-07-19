@@ -21,10 +21,6 @@ import { State } from './core/state/state';
     CoreModule,
     HttpClientModule,
     AppRoutingModule,
-    MatMenuModule,
-    MatIconModule,
-    BrowserAnimationsModule,
-    MatNativeDateModule
   ],
   providers: [
     State

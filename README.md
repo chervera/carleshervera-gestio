@@ -44,6 +44,8 @@ https://angular-academy.com/angular-jwt/
 1. - A HTML layout
   1. - Bootstrap 4
   1. - Icon font
+1. - Validacions i formularis
+  1. - Crear component de show errors genèric.
 1. - Convert state into inmutable state
 1. - Finish and add the module generation schematics.
 1. - Example test

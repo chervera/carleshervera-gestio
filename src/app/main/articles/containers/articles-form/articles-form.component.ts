@@ -85,6 +85,7 @@ export class ArticlesFormComponent implements OnInit {
 
   saveArticle() {
     let article: Article = this.getEditedArticle();
+
     if (article.id) {
       this.saveUpdateArticle(article);
     } else {

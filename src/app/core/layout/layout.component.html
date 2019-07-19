@@ -1,0 +1,15 @@
+<header class="header">
+  <span class="header__title">Carles Hervera Gestió</span>
+  <div class="header__menu">
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item>Settings</button>
+      <button mat-menu-item>Help</button>
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+</header>
+<section class="main">
+  <router-outlet></router-outlet>
+</section>
