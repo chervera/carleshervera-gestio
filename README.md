@@ -32,13 +32,15 @@ https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-an
 
 https://material.angular.io/
 
+https://angular-academy.com/angular-jwt/
+
 
 ## Arquitecture
 
 ## TODO:
 
 
-1. - The JWT authentication
+1. - The JWT authentication - Done
 1. - A HTML layout
   1. - Bootstrap 4
   1. - Icon font

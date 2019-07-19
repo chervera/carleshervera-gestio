@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserFacade } from '../../user.facade';
+import { AuthService } from 'src/app/core/auth/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private userFacade: UserFacade
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -36,10 +36,10 @@ export class LoginComponent implements OnInit {
   onLogin() {
     if (this.form.valid) {
       let { username, password } = this.form.value;
-      this.userFacade.login(username, password).subscribe(
+      this.authService.login(username, password).subscribe(
         () => {
-          this.userFacade.printState();
-          console.log('login de puta mare');
+          this.authService.printState();
+          this.router.navigate(['/']);
         }
       )
     }
