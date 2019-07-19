@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UserState extends State {
+export class AuthState extends State {
 
   private readonly token$ = new BehaviorSubject<string>(null);
 

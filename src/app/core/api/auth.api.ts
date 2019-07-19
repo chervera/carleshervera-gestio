@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class UserApi {
+export class AuthApi {
 
   readonly API = 'http://localhost:4321/login';
 

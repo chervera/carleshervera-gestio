@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ArticlesState } from 'src/app/main/articles/state/articles.state';
 import { State } from './state';
-import { UserState } from 'src/app/main/user/state/user.state';
+import { AuthState } from 'src/app/core/state/auth.state';
 
 
 @Injectable({
@@ -13,12 +13,12 @@ export class CoreState extends State {
     super();
   }
 
-  user: UserState = new UserState();
+  auth: AuthState = new AuthState();
   articles: ArticlesState = new ArticlesState();
 
 
   printGlobalState() {
-    let globalState = this.printState();
+    const globalState = this.printState();
     console.log(globalState);
   }
 
