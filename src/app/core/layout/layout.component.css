@@ -4,6 +4,10 @@
   height: 60px;
 
   padding: 0 40px;
+  
+}
+
+.header__content{
   display: flex;
   flex-direction: row;
   align-items: center;

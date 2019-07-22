@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthState extends State {
 
   private readonly token$ = new BehaviorSubject<string>(null);
+  private readonly user$ = new BehaviorSubject<any>(null);
 
   constructor() {
     super();
@@ -20,9 +21,20 @@ export class AuthState extends State {
   getToken() {
     return this.token$.value;
   }
+
   setToken$(token: string) {
     this.token$.next(token);
   }
+
+  getUser$() {
+    return this.user$.asObservable();
+  }
+
+  setUser$(user) {
+    this.user$.next(user);
+  }
+
+
 
 
 }

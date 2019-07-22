@@ -40,7 +40,6 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
   </mat-table>
-  [{{totalArticles | async}}]
 
   <mat-paginator [length]="totalArticles | async" [pageSize]="itemsPerPage" [pageSizeOptions]="pageSizeOptions"
     (page)="onPaginate($event)">
