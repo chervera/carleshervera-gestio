@@ -9,5 +9,8 @@
         (sort)="onSort($event)" (paginate)="onPaginate($event)">
       </app-articles-table>
     </div>
+    <div class="button-wrapper button-wrapper--right">
+      <button mat-flat-button color="primary" (click)="onExport()">Exportar</button>
+    </div>
   </mat-card>
 </div>

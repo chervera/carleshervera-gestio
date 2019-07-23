@@ -16,6 +16,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { ExportModule } from 'src/app/shared/export/export.module';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatCheckboxModule,
     MatButtonModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    ExportModule
   ]
 })
 export class ArticlesModule { }

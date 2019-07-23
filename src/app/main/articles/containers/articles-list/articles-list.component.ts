@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { ArticlesFacade } from '../../articles.facade';
 import { Observable } from 'rxjs';
 import { Article } from '../../models/article';
@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 import { ArticlesDataSource } from '../../components/articles-table/articles.data-source';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
+import { ExportService } from 'src/app/shared/export/export.service';
+import { ArticlesTableComponent } from '../../components/articles-table/articles-table.component';
+import { tap, take } from 'rxjs/operators';
 
 
 @Component({
@@ -22,9 +25,12 @@ export class ArticlesListComponent implements OnInit {
   dataSource: ArticlesDataSource;
   itemsPerPage: number = 3;
 
+  @ViewChild(ArticlesTableComponent, { static: true }) articlesTable: ArticlesTableComponent;
+
   constructor(
     private articlesFacade: ArticlesFacade,
-    private router: Router
+    private router: Router,
+    private exportService: ExportService
   ) {
     this.isUpdating$ = articlesFacade.isUpdating$();
     this.articles$ = articlesFacade.getArticles$();
@@ -39,6 +45,16 @@ export class ArticlesListComponent implements OnInit {
 
   onAdd() {
     this.router.navigate(['articles/new']);
+  }
+
+  onExport() {
+    this.articles$.pipe(
+      take(1),
+      tap((data: Article[]) => {
+        const preparedToExport = this.exportService.prepareToExport(data, this.articlesTable.dataColumns);
+        this.exportService.exportAsExcelFile(preparedToExport, 'name-of-the-file');;
+      })
+    ).subscribe();
   }
 
   editArticle(id: number) {

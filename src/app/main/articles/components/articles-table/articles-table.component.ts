@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ArticlesDataSource } from './articles.data-source';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ArticlesFacade } from '../../articles.facade';
 import { MatSort, Sort } from '@angular/material/sort';
 
@@ -25,7 +25,8 @@ export class ArticlesTableComponent implements OnInit {
   @Input() dataSource: ArticlesDataSource;
 
 
-  displayedColumns: string[] = ['id', 'title', 'short_description', 'actions'];
+  dataColumns: string[] = ['id', 'title', 'short_description'];
+  displayedColumns: string[] = [...this.dataColumns, 'actions']
   totalArticles: Observable<number>;
 
   pageSizeOptions = [3, 6, 12];
