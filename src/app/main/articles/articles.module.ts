@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ExportModule } from 'src/app/shared/export/export.module';
+import { UiModule } from 'src/app/shared/ui/ui.module';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { ExportModule } from 'src/app/shared/export/export.module';
     MatButtonModule,
     MatPaginatorModule,
     MatSortModule,
-    ExportModule
+    ExportModule,
+    UiModule
   ]
 })
 export class ArticlesModule { }

@@ -8,6 +8,7 @@
         </mat-form-field>-->
         <mat-form-field class="form__field-container">
           <input matInput placeholder="Títol" id="title" formControlName="title">
+          <mat-input-error [control]="form.controls.title"></mat-input-error>
         </mat-form-field>
         <mat-form-field class="form__field-container">
           <input matInput placeholder="Descripció curta" id="short_description" formControlName="short_description">

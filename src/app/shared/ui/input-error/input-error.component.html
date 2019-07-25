@@ -1,0 +1,13 @@
+<div *ngIf="control.invalid && (control.dirty || control.touched)">
+  <mat-error *ngIf="control.errors.required">This field is required</mat-error>
+  <mat-error *ngIf="control.errors.unique">{{control.errors.unique}}</mat-error>
+  <mat-error *ngIf="control.errors.lessThen">{{control.errors.lessThen}}</mat-error>
+  <mat-error *ngIf="control.errors.minlength">
+    The field size has to be at least {{control.errors.minlength.requiredLength}}, the current size is
+    {{control.errors.minlength.actualLength}}
+  </mat-error>
+  <mat-error *ngIf="control.errors.greaterThan">{{control.errors.greaterThan}}</mat-error>
+  <mat-error *ngIf="control.errors.email">{{control.errors.email}}</mat-error>
+  <mat-error *ngIf="control.errors.mobile">{{control.errors.mobile}}</mat-error>
+  <mat-error *ngIf="control.errors.confirmPassword">{{control.errors.confirmPassword}}</mat-error>
+</div>

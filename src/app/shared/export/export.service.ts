@@ -3,9 +3,8 @@ import { ExportModule } from './export.module';
 import * as XLSX from 'xlsx';
 
 @Injectable({
-  providedIn: ExportModule
+  providedIn: 'root'
 })
-
 
 export class ExportService {
 

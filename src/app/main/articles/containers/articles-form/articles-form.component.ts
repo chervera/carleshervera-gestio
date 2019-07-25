@@ -42,7 +42,6 @@ export class ArticlesFormComponent implements OnInit {
       filter(data => data != null)
     ).subscribe(
       (message) => {
-        console.debug(message);
         this.goToList();
       }
     );
@@ -85,11 +84,12 @@ export class ArticlesFormComponent implements OnInit {
 
   saveArticle() {
     let article: Article = this.getEditedArticle();
-
-    if (article.id) {
-      this.saveUpdateArticle(article);
-    } else {
-      this.saveNewArticle(article);
+    if (this.form.valid) {
+      if (article.id) {
+        this.saveUpdateArticle(article);
+      } else {
+        this.saveNewArticle(article);
+      }
     }
   }
 
@@ -107,10 +107,10 @@ export class ArticlesFormComponent implements OnInit {
 
   private buildForm() {
     return this.formBuilder.group({
-      title: ['', Validators.required],
+      title: ['', [Validators.required, Validators.minLength(3)]],
       short_description: ['', Validators.required],
       description: [''],
-      created_on: [''],
+      created_on: ['', []],
       active: [''],
       slug: ['', Validators.required],
     });
