@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { ArticlesDataSource } from './articles.data-source';
 import { Observable } from 'rxjs';
-import { ArticlesFacade } from '../../articles.facade';
 import { MatSort, Sort } from '@angular/material/sort';
+import { CoreDataSource } from 'src/app/core/data-source/data-source';
+import { Article } from '../../models/article';
 
 
 @Component({
@@ -22,21 +22,21 @@ export class ArticlesTableComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sorter: MatSort;
 
-  @Input() dataSource: ArticlesDataSource;
+  @Input() dataSource: CoreDataSource<Article>;
 
 
   dataColumns: string[] = ['id', 'title', 'short_description'];
   displayedColumns: string[] = [...this.dataColumns, 'actions']
   totalArticles: Observable<number>;
+  loading$: Observable<boolean>;
 
   pageSizeOptions = [3, 6, 12];
 
-  constructor(
-    private articlesFacade: ArticlesFacade
-  ) { }
+  constructor() { }
 
   ngOnInit() {
-    this.totalArticles = this.articlesFacade.getTotalArticles$();
+    this.totalArticles = this.dataSource.getTotalItems$();
+    this.loading$ = this.dataSource.getIsUpdating$();
   }
 
   onEdit(id: number) {

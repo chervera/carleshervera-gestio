@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Article } from '../models/article';
 import { State } from 'src/app/core/state/state';
 
@@ -14,6 +14,7 @@ export class ArticlesState extends State {
 
   private readonly updating$ = new BehaviorSubject<boolean>(false);
   private readonly completed$ = new BehaviorSubject<string>(this.NOT_COMPLETED);
+  private readonly error$ = new BehaviorSubject<Error>(null);
   private readonly articles$ = new BehaviorSubject<Article[]>(null);
   private readonly totalArticles$ = new BehaviorSubject<number>(0);
   private readonly article$ = new BehaviorSubject<Article>(null);
@@ -110,6 +111,14 @@ export class ArticlesState extends State {
 
   getSelectedId(): number {
     return this.selectedId;
+  }
+
+  getError$() {
+    return this.error$.asObservable();
+  }
+
+  setError(error: Error) {
+    return this.error$.next(error);
   }
 
 }

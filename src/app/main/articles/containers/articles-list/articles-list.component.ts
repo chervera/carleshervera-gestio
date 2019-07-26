@@ -3,12 +3,12 @@ import { ArticlesFacade } from '../../articles.facade';
 import { Observable } from 'rxjs';
 import { Article } from '../../models/article';
 import { Router } from '@angular/router';
-import { ArticlesDataSource } from '../../components/articles-table/articles.data-source';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { ExportService } from 'src/app/shared/export/export.service';
 import { ArticlesTableComponent } from '../../components/articles-table/articles-table.component';
 import { tap, take } from 'rxjs/operators';
+import { CoreDataSource } from 'src/app/core/data-source/data-source';
 
 
 @Component({
@@ -20,9 +20,10 @@ import { tap, take } from 'rxjs/operators';
 export class ArticlesListComponent implements OnInit {
 
   articles$: Observable<Article[]>;
+  error$: Observable<Article[]>;
   totalArticles$: Observable<number>;
   isUpdating$: Observable<boolean>;
-  dataSource: ArticlesDataSource;
+  dataSource: CoreDataSource<Article>;
   itemsPerPage: number = 3;
 
   @ViewChild(ArticlesTableComponent, { static: true }) articlesTable: ArticlesTableComponent;
@@ -34,9 +35,10 @@ export class ArticlesListComponent implements OnInit {
   ) {
     this.isUpdating$ = articlesFacade.isUpdating$();
     this.articles$ = articlesFacade.getArticles$();
+    this.error$ = articlesFacade.getError$();
     this.totalArticles$ = articlesFacade.getTotalArticles$();
     this.articlesFacade.setPageSize(this.itemsPerPage);
-    this.dataSource = new ArticlesDataSource(this.articlesFacade.getArticles$());
+    this.dataSource = new CoreDataSource<Article>(this.articlesFacade.getArticles$(), this.articlesFacade.getTotalArticles$(), this.articlesFacade.isUpdating$());
   }
 
   ngOnInit() {

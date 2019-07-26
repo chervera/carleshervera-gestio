@@ -46,8 +46,14 @@ https://angular-academy.com/angular-jwt/
   1. - Bootstrap 4
   1. - Icon font
 1. - Validacions i formularis
-  1. - Crear component de show errors genèric.
-1. - Export xls service.  
+  1. - Crear component de show errors genèric. - Done
+  1. - Handle errors.
+    1. - Server side
+    1. - Generals
+1. - Export xls service. 
+  1. - Make the service - Done
+  1. - Improve the service.
 1. - Convert state into inmutable state
 1. - Finish and add the module generation schematics.
 1. - Example test
+1. - i18n

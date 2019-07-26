@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { ArticlesApi } from './api/articles.api';
 import { Observable } from 'rxjs';
 import { Article } from './models/article';
-import { tap, take } from 'rxjs/operators';
+import { tap, take, catchError, finalize } from 'rxjs/operators';
 import { CoreState } from 'src/app/core/state/core.state';
-import { HttpResponse } from '@angular/common/http';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 
 @Injectable({
@@ -39,6 +39,10 @@ export class ArticlesFacade {
     return this.state.articles.getArticles$();
   }
 
+  getError$(): Observable<any> {
+    return this.state.articles.getError$();
+  }
+
   getTotalArticles$() {
     return this.state.articles.getTotalArticles$();
   }
@@ -48,13 +52,23 @@ export class ArticlesFacade {
     this.articlesApi.getArticles(this.state.articles.getPage$().value, this.state.articles.getPageSize$().value, this.state.articles.getSortField$().value, this.state.articles.getSortDirection$().value)
       .pipe(
         take(1),
-        tap((response: HttpResponse<Article[]>) => {
-          this.state.articles.setArticles(response.body);
-          console.log(response.headers.keys());
-          this.state.articles.setTotalArticles(+response.headers.get(this.articlesApi.HEADER_TOTAL_ITEMS));
-          this.state.articles.setUpdating(false);
-        })
-      ).subscribe();
+        finalize(() => this.state.articles.setUpdating(false))
+      ).subscribe(
+        (response: HttpResponse<Article[]>) => this.setArticlesState(response.body, +response.headers.get(this.articlesApi.HEADER_TOTAL_ITEMS)),
+        (error) => this.setArticlesErrorState(error),
+      );
+  }
+
+  private setArticlesState(articles: Article[], totalArticles: number) {
+    this.state.articles.setArticles(articles);
+    this.state.articles.setTotalArticles(totalArticles);
+    this.state.articles.setError(null);
+  }
+
+  private setArticlesErrorState(error) {
+    this.state.articles.setArticles([]);
+    this.state.articles.setTotalArticles(0);
+    this.state.articles.setError(error);
   }
 
   getArticle$(): Observable<Article> {
