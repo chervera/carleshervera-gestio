@@ -5,6 +5,8 @@ import { Article } from './models/article';
 import { tap, take, catchError, finalize } from 'rxjs/operators';
 import { CoreState } from 'src/app/core/state/core.state';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { Tag } from './models/tag';
+import { TagsApi } from './api/tags.api';
 
 
 @Injectable({
@@ -14,6 +16,7 @@ export class ArticlesFacade {
 
   constructor(
     private articlesApi: ArticlesApi,
+    private tagsApi: TagsApi,
     private state: CoreState
   ) { }
 
@@ -59,6 +62,17 @@ export class ArticlesFacade {
       );
   }
 
+  loadTags() {
+    this.state.articles.setUpdating(true);
+    this.tagsApi.getTags()
+      .pipe(
+        take(1),
+        finalize(() => this.state.articles.setUpdating(false))
+      ).subscribe(
+        (data) => this.state.articles.setTags(data),
+      );
+  }
+
   private setArticlesState(articles: Article[], totalArticles: number) {
     this.state.articles.setArticles(articles);
     this.state.articles.setTotalArticles(totalArticles);
@@ -73,6 +87,10 @@ export class ArticlesFacade {
 
   getArticle$(): Observable<Article> {
     return this.state.articles.getArticle$();
+  }
+
+  getTags$(): Observable<Tag[]> {
+    return this.state.articles.getTags$();
   }
 
   loadArticle(id: number) {

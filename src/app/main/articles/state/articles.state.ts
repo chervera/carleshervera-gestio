@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Article } from '../models/article';
 import { State } from 'src/app/core/state/state';
+import { Tag } from '../models/tag';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class ArticlesState extends State {
   private readonly completed$ = new BehaviorSubject<string>(this.NOT_COMPLETED);
   private readonly error$ = new BehaviorSubject<Error>(null);
   private readonly articles$ = new BehaviorSubject<Article[]>(null);
+  private readonly tags$ = new BehaviorSubject<Tag[]>(null);
   private readonly totalArticles$ = new BehaviorSubject<number>(0);
   private readonly article$ = new BehaviorSubject<Article>(null);
   private readonly sortField$ = new BehaviorSubject<string>(null);
@@ -95,6 +97,14 @@ export class ArticlesState extends State {
 
   setArticles(articles: Article[]) {
     this.articles$.next(articles);
+  }
+
+  getTags$() {
+    return this.tags$.asObservable();
+  }
+
+  setTags(tags: Tag[]) {
+    this.tags$.next(tags);
   }
 
   getArticle$() {

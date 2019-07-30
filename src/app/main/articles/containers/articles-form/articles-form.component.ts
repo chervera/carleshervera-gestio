@@ -5,6 +5,7 @@ import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ArticlesFacade } from '../../articles.facade';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Tag } from '../../models/tag';
 
 @Component({
   selector: 'app-articles-form',
@@ -15,6 +16,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class ArticlesFormComponent implements OnInit {
 
   article$: Observable<Article>;
+  tags$: Observable<Tag[]>;
 
   isUpdating$: Observable<boolean>;
   isCompleted$: Observable<string>;
@@ -29,12 +31,14 @@ export class ArticlesFormComponent implements OnInit {
   ) {
     this.isUpdating$ = articlesFacade.isUpdating$();
     this.article$ = this.articlesFacade.getArticle$();
+    this.tags$ = this.articlesFacade.getTags$();
     this.isCompleted$ = this.articlesFacade.isCompleted$();
   }
 
   ngOnInit() {
 
     this.initArticle();
+    this.initTags();
     this.initForm();
 
     this.articlesFacade.initCompleted();
@@ -54,6 +58,10 @@ export class ArticlesFormComponent implements OnInit {
     } else {
       this.newArticle();
     }
+  }
+
+  private initTags() {
+    this.articlesFacade.loadTags();
   }
 
   private initForm() {
@@ -113,6 +121,7 @@ export class ArticlesFormComponent implements OnInit {
       created_on: ['', []],
       active: [''],
       slug: ['', Validators.required],
+      tags: [null, []]
     });
   }
 
