@@ -11,14 +11,18 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ### Explicación de capas y organización de código
 ![estructura de carpetas](readme-assets/estructura-carpetas.jpg?raw=true "Estructura de carpetas")
 
-### carpeta core
+#### carpeta core
 En el módulo core se pondrá todo lo que vayan a usar la mayoría de modulos. Es un módulo que será cargado en el componente main, por lo que siempre estará disponible y será cargado al arranque de la aplicación.
 
-### carpeta main
+#### carpeta main
 Es el módulo principal, aquí es donde distribuiremos todos los modulos del negocio de la aplicación.
 
-### carpeta shared
+#### carpeta shared
 Aquí irán incluídos todos los módulos que no serán cargados automaticamente con la aplicación. Són modulos o herramientas que los modulos de la carpeta main importaran si los necesitan.
+
+### Traducciones y i18n
+https://github.com/ngx-translate/core
+
 
 ## TODO:
 
@@ -39,7 +43,7 @@ Aquí irán incluídos todos los módulos que no serán cargados automaticamente
 1. - Convert state into inmutable state
 1. - Finish and add the module generation schematics.
 1. - Example test
-1. - i18n
+1. - i18n - Done
 
 
 
@@ -50,6 +54,9 @@ https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-an
 https://material.angular.io/
 
 https://angular-academy.com/angular-jwt/
+
+https://github.com/ngx-translate/core
+
 
 ## Development server
 

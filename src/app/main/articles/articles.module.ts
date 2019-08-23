@@ -19,6 +19,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { ExportModule } from 'src/app/shared/export/export.module';
 import { UiModule } from 'src/app/shared/ui/ui.module';
 import { MatSelectModule } from '@angular/material/select';
+import { CoreModule } from 'src/app/core/core.module';
 
 
 
@@ -30,6 +31,7 @@ import { MatSelectModule } from '@angular/material/select';
   ],
   imports: [
     CommonModule,
+    CoreModule,
     ArticlesRoutingModule,
     ReactiveFormsModule,
     MatTableModule,
