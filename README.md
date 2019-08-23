@@ -21,8 +21,22 @@ Es el módulo principal, aquí es donde distribuiremos todos los modulos del neg
 Aquí irán incluídos todos los módulos que no serán cargados automaticamente con la aplicación. Són modulos o herramientas que los modulos de la carpeta main importaran si los necesitan.
 
 ### Traducciones y i18n
+El modulo de traducciones no es necesario importarlo ya que esta inicializado en el modulo Core que todos los modulos importan.
+
+Las traducciones estan en formato JSON en la raiz del proyecto.
 https://github.com/ngx-translate/core
 
+### Error handler
+
+En el modulo core, hay una carpeta error-handler con los servicios necesarios para tratar los errores:
+  1. - ErrorService -> sirve para tratar el error del navegador
+  2. - GlobalErrorHandler -> es el que sobreescribe el handler por defecto de angular, se definie en los providers del modulo.
+  [Alerta] - Si los errores de peticiones http son controlados en la suscripción de obserbables, no serán tratados por el handler, si se quiere que los trate el handler, despues de hacer lo que sea necesario hay que propagar el error con el throw error.
+  3. - LoggingService -> se encarga de registrar los errores, hay que hacer una petición al servicio rest de log de errores, falta definir y hacer.
+  4. - NotificationService -> sen encarga de notificar mediante algun tipo de alert al usuario del error. 
+
+
+https://medium.com/@michael.karen/esperando-lo-inesperado-buenas-pr%C3%A1cticas-para-el-manejo-de-errores-en-angular-dc578da68ef9
 
 ## TODO:
 
@@ -35,8 +49,7 @@ https://github.com/ngx-translate/core
 1. - Validacions i formularis
   1. - Crear component de show errors genèric. - Done
   1. - Handle errors.
-    1. - Server side
-    1. - Generals
+    1. - Falta fer el loggin service, però s'ha de definir un "back" on cridar.
 1. - Export xls service. 
   1. - Make the service - Done
   1. - Improve the service.

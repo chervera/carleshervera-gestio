@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -9,7 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { GlobalErrorHandler } from './error-handler/global-error-handler';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -22,14 +23,14 @@ import { GlobalErrorHandler } from './error-handler/global-error-handler';
     MatMenuModule,
     MatIconModule,
     MatNativeDateModule,
+    MatSnackBarModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    },
-
+    }
   ],
   exports: [
     CommonModule,

@@ -83,6 +83,7 @@ export class ArticlesFacade {
     this.state.articles.setArticles([]);
     this.state.articles.setTotalArticles(0);
     this.state.articles.setError(error);
+    throw error;
   }
 
   getArticle$(): Observable<Article> {

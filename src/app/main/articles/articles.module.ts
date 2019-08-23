@@ -30,7 +30,6 @@ import { CoreModule } from 'src/app/core/core.module';
     ArticlesFormComponent
   ],
   imports: [
-    CommonModule,
     CoreModule,
     ArticlesRoutingModule,
     ReactiveFormsModule,
