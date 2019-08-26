@@ -8,24 +8,37 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Arquitecture
 
-### capas y organización de código
 ![estructura de carpetas](readme-assets/estructura-carpetas.jpg?raw=true "Estructura de carpetas")
 
-#### carpeta core
+### módulo core
 En el módulo core se pondrá todo lo que vayan a usar la mayoría de modulos. Es un módulo que será cargado en el componente main, por lo que siempre estará disponible y será cargado al arranque de la aplicación.
 
-#### carpeta shared
+### carpeta shared
 Aquí irán incluídos todos los módulos que no serán cargados automaticamente con la aplicación. Són modulos o herramientas que los modulos de la carpeta main importaran si los necesitan.
 
-#### carpeta main
-Es el módulo principal, aquí es donde distribuiremos todos los modulos del negocio de la aplicación.
+### carpeta main
+Aquí es donde distribuiremos todos los modulos del negocio de la aplicación.
 
-##### modulos negocio
+#### módulos negocio
 Los módulos de negocio estarán compuestos de las siguientes carpetas:
 
-1. api
-En esta carpeta se encontrarán los servicios de acceso a la api si el modulo en cuestión acceda a alguna api.
+1. **api** - En esta carpeta se encontrarán los servicios de acceso a la api si el modulo en cuestión acceda a alguna api.
 
+1. **components** - En esta carpeta irán los componentes "tontos". Serán componentes puros, que solo accederán a datos que les entren por @Inputs. De esta forma serán muy reutilizables, mantenibles y facilmente testeables. Los que creamos necesarios, serán exportados para que otros modulos los puedan usar.
+
+1. **containers** - Aquí se encontrarán los módulos "listos". Estos serán los modulos a los que una ruta del routing apuntará. Ellos se encargarán de gestionar los servicios necesarios para que los sub componentes puedan acceder a los datos necesario. Iniciarán o reiniciaran el estado y consultarán la api.
+
+1. **guards** - Aquí pondremos los [guards](https://angular.io/guide/router) de seguridad, para protejer las rutas de este módulo. Si no hay, no es necesario tener esta carpeta.
+
+1. **models** - Esta carpeta es donde irán los modelos que usemos en este modulo. No es necesario tener el modelo de los objetos de la api con la que trabajemos, pero es recomendable y agilizará el desarrollo.
+
+1. **state** - Aquí irá el estado del módulo, en principio solo un fichero aunque si es necesario se crearán mas. Los estados de esta carpeta solo serán usados desde el estado del core. nunca directamente.
+
+1. **routing** - Las rutas del modulo. Como mínimo una por container.
+
+1. **facade** - Este será el servicio que comunica nuestros containers con el estado y la api. Es el que será inyectado a nuestros containers.
+
+1. **module** - El fichero de definición del módulo. Todos tienen que importar el CoreModule.
 
 ### Traducciones y i18n
 El modulo de traducciones no es necesario importarlo ya que esta inicializado en el modulo Core que todos los modulos importan.
@@ -64,8 +77,11 @@ https://medium.com/@michael.karen/esperando-lo-inesperado-buenas-pr%C3%A1cticas-
 1. - Finish and add the module generation schematics.
 1. - Example test
 1. - i18n - Done
+1. - Comprovador que los modelos estén actualizados con la api? vale la pena? es posible?
 
-
+## A comentar con el equipo de arquitetura
+1. modulos shared
+1. Validators
 
 ## Based on:
 
