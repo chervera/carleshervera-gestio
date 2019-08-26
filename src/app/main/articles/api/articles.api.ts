@@ -12,6 +12,7 @@ import { PageEvent } from '@angular/material/paginator';
 export class ArticlesApi {
 
   readonly API = 'http://localhost:4321/ws/article';
+  readonly API_ERROR = 'http://localhost:4321/ws/error';
   readonly HEADER_TOTAL_ITEMS = 'X-Total-Count';
 
   constructor(private http: HttpClient) { }
@@ -35,7 +36,7 @@ export class ArticlesApi {
   }
 
   create(article: Article): Observable<Article> {
-    return this.http.post<Article>(this.API, article);
+    return this.http.post<Article>(this.API_ERROR, article);
   }
 
   update(article: Article): Observable<Article> {

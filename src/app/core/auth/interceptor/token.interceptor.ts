@@ -46,7 +46,7 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private handle401ErrorAndRedirect(request: HttpRequest<any>, next: HttpHandler) {
-    return this.router.navigate(['login']);
+    return this.router.navigate(['user/login']);
   }
 
   private handle401ErrorAndRefresh(request: HttpRequest<any>, next: HttpHandler) {

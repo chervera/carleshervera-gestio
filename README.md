@@ -24,7 +24,7 @@ Los módulos de negocio estarán compuestos de las siguientes carpetas:
 
 1. **api** - En esta carpeta se encontrarán los servicios de acceso a la api si el modulo en cuestión acceda a alguna api.
 
-1. **components** - En esta carpeta irán los componentes "tontos". Serán componentes puros, que solo accederán a datos que les entren por @Inputs. De esta forma serán muy reutilizables, mantenibles y facilmente testeables. Los que creamos necesarios, serán exportados para que otros modulos los puedan usar.
+1. **components** - En esta carpeta irán los componentes "tontos". Serán componentes puros, que solo accederán a datos que les entren por @Inputs. De esta forma serán muy reutilizables, mantenibles y facilmente testeables. Los que creamos necesarios, serán exportados para que otros modulos los puedan usar. Es obligatorio poner la detección de cambios en onPush ChangeDetectionStrategy.OnPush
 
 1. **containers** - Aquí se encontrarán los módulos "listos". Estos serán los modulos a los que una ruta del routing apuntará. Ellos se encargarán de gestionar los servicios necesarios para que los sub componentes puedan acceder a los datos necesario. Iniciarán o reiniciaran el estado y consultarán la api.
 
@@ -63,9 +63,13 @@ https://medium.com/@michael.karen/esperando-lo-inesperado-buenas-pr%C3%A1cticas-
 
 1. - The JWT authentication - Done
   1. - Fer que guardi el token en una cookie un ratet
-1. - A HTML layout
+1. - A HTML layout - refer-lo per a que moli una mica més
   1. - Bootstrap 4
   1. - Icon font
+1. - Millores de codi
+  1. - Definir les apis de forma relativa, utilitzar un proxy
+    1. - En les apis que consultin temes que han de ser cachejats utilitzar l'operador rxJS shareReplay
+  1. - Crear les clases base que toquin al core.
 1. - Validacions i formularis
   1. - Crear component de show errors genèric. - Done
   1. - Handle errors.

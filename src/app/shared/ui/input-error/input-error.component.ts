@@ -1,20 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { PropertyError } from 'src/app/core/error-handler/response-error';
 
 @Component({
   selector: 'mat-input-error',
   templateUrl: './input-error.component.html',
-  styles: []
 })
-export class InputErrorComponent implements OnInit {
+export class InputErrorComponent {
 
   @Input() control: FormControl;
-
-  constructor() {
-
-  }
-
-  ngOnInit() {
-  }
+  @Input() propertyError: PropertyError;
 
 }

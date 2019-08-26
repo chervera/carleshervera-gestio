@@ -1,22 +1,24 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Article } from '../../models/article';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ArticlesFacade } from '../../articles.facade';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Tag } from '../../models/tag';
+import { ResponseError, PropertyError } from 'src/app/core/error-handler/response-error';
 
 @Component({
   selector: 'app-articles-form',
   templateUrl: './articles-form.component.html',
   styleUrls: ['./articles-form.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticlesFormComponent implements OnInit {
 
   article$: Observable<Article>;
   tags$: Observable<Tag[]>;
+  formErrors: ResponseError;
 
   isUpdating$: Observable<boolean>;
   isCompleted$: Observable<string>;
@@ -40,7 +42,20 @@ export class ArticlesFormComponent implements OnInit {
     this.initArticle();
     this.initTags();
     this.initForm();
+    this.isCompletedSubscription();
+    this.errorFormSubscription();
 
+  }
+
+  private errorFormSubscription() {
+    this.articlesFacade.getFormError$().subscribe(
+      (error: ResponseError) => {
+        this.formErrors = error
+      }
+    );
+  }
+
+  private isCompletedSubscription() {
     this.articlesFacade.initCompleted();
     this.isCompleted$.pipe(
       filter(data => data != null)

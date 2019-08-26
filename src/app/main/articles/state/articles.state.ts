@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Article } from '../models/article';
 import { State } from 'src/app/core/state/state';
 import { Tag } from '../models/tag';
+import { ResponseError } from 'src/app/core/error-handler/response-error';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class ArticlesState extends State {
   private readonly tags$ = new BehaviorSubject<Tag[]>(null);
   private readonly totalArticles$ = new BehaviorSubject<number>(0);
   private readonly article$ = new BehaviorSubject<Article>(null);
+  private readonly formError$ = new BehaviorSubject<ResponseError>(null);
   private readonly sortField$ = new BehaviorSubject<string>(null);
   private readonly sortDirection$ = new BehaviorSubject<string>(null);
   private readonly page$ = new BehaviorSubject<number>(this.INIT_PAGE);
@@ -113,6 +115,14 @@ export class ArticlesState extends State {
 
   setArticle(article: Article) {
     this.article$.next(article);
+  }
+
+  getFormError$() {
+    return this.formError$.asObservable();
+  }
+
+  setFormError(formError: ResponseError) {
+    this.formError$.next(formError);
   }
 
   setSelectedId(id: number) {

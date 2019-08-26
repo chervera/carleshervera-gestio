@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { ArticlesApi } from './api/articles.api';
 import { Observable } from 'rxjs';
 import { Article } from './models/article';
-import { tap, take, catchError, finalize } from 'rxjs/operators';
+import { tap, take, finalize, map, filter } from 'rxjs/operators';
 import { CoreState } from 'src/app/core/state/core.state';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
 import { Tag } from './models/tag';
 import { TagsApi } from './api/tags.api';
+import { ResponseError } from 'src/app/core/error-handler/response-error';
 
 
 @Injectable({
@@ -90,6 +91,14 @@ export class ArticlesFacade {
     return this.state.articles.getArticle$();
   }
 
+  getFormError$(): Observable<ResponseError> {
+    return this.state.articles.getFormError$()
+      .pipe(
+        filter(data => data != null),
+        map(error => new ResponseError(error))
+      );
+  }
+
   getTags$(): Observable<Tag[]> {
     return this.state.articles.getTags$();
   }
@@ -116,7 +125,7 @@ export class ArticlesFacade {
         this.state.articles.setArticle(article);
         this.state.articles.setCompleted('Article afegit correctament');
       },
-      (error) => console.error(error),
+      (error) => this.state.articles.setFormError(error.error),
       () => this.state.articles.setUpdating(false)
     );
   }
