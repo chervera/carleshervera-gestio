@@ -9,10 +9,9 @@ export class ResponseError {
     this.message = error.message;
     this.messageDetail = error.messageDetail;
     this.propertyErrors = error.propertyErrors;
-  }
-
-  public getProperty(key: string) {
-    return this.propertyErrors.find((propertyError: PropertyError) => propertyError.property == key);
+    this.propertyErrors.forEach(property => {
+      this[property.property] = property;
+    })
   }
 }
 

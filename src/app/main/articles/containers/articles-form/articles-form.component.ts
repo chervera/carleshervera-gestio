@@ -12,13 +12,13 @@ import { ResponseError, PropertyError } from 'src/app/core/error-handler/respons
   selector: 'app-articles-form',
   templateUrl: './articles-form.component.html',
   styleUrls: ['./articles-form.component.css'],
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticlesFormComponent implements OnInit {
 
   article$: Observable<Article>;
   tags$: Observable<Tag[]>;
-  formErrors: ResponseError;
+  formApiErrors$: Observable<ResponseError>
 
   isUpdating$: Observable<boolean>;
   isCompleted$: Observable<string>;
@@ -38,21 +38,15 @@ export class ArticlesFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.initArticle();
     this.initTags();
     this.initForm();
     this.isCompletedSubscription();
     this.errorFormSubscription();
-
   }
 
   private errorFormSubscription() {
-    this.articlesFacade.getFormError$().subscribe(
-      (error: ResponseError) => {
-        this.formErrors = error
-      }
-    );
+    this.formApiErrors$ = this.articlesFacade.getFormError$();
   }
 
   private isCompletedSubscription() {
