@@ -8,17 +8,24 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Arquitecture
 
-### Explicación de capas y organización de código
+### capas y organización de código
 ![estructura de carpetas](readme-assets/estructura-carpetas.jpg?raw=true "Estructura de carpetas")
 
 #### carpeta core
 En el módulo core se pondrá todo lo que vayan a usar la mayoría de modulos. Es un módulo que será cargado en el componente main, por lo que siempre estará disponible y será cargado al arranque de la aplicación.
 
+#### carpeta shared
+Aquí irán incluídos todos los módulos que no serán cargados automaticamente con la aplicación. Són modulos o herramientas que los modulos de la carpeta main importaran si los necesitan.
+
 #### carpeta main
 Es el módulo principal, aquí es donde distribuiremos todos los modulos del negocio de la aplicación.
 
-#### carpeta shared
-Aquí irán incluídos todos los módulos que no serán cargados automaticamente con la aplicación. Són modulos o herramientas que los modulos de la carpeta main importaran si los necesitan.
+##### modulos negocio
+Los módulos de negocio estarán compuestos de las siguientes carpetas:
+
+1. api
+En esta carpeta se encontrarán los servicios de acceso a la api si el modulo en cuestión acceda a alguna api.
+
 
 ### Traducciones y i18n
 El modulo de traducciones no es necesario importarlo ya que esta inicializado en el modulo Core que todos los modulos importan.
@@ -63,6 +70,8 @@ https://medium.com/@michael.karen/esperando-lo-inesperado-buenas-pr%C3%A1cticas-
 ## Based on:
 
 https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-and-rxjs-41p8
+
+https://medium.com/fincura-engineering/front-end-architecture-for-angular-applications-d6840b78706c
 
 https://material.angular.io/
 
