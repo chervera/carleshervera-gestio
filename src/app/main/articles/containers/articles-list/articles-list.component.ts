@@ -8,8 +8,6 @@ import { Sort } from '@angular/material/sort';
 import { ExportService } from 'src/app/shared/export/export.service';
 import { ArticlesTableComponent } from '../../components/articles-table/articles-table.component';
 import { tap, take } from 'rxjs/operators';
-import { CoreDataSource } from 'src/app/core/data-source/data-source';
-
 
 @Component({
   selector: 'app-articles',
@@ -23,7 +21,6 @@ export class ArticlesListComponent implements OnInit {
   error$: Observable<Article[]>;
   totalArticles$: Observable<number>;
   isUpdating$: Observable<boolean>;
-  dataSource: CoreDataSource<Article>;
   itemsPerPage: number = 3;
 
   @ViewChild(ArticlesTableComponent, { static: true }) articlesTable: ArticlesTableComponent;
@@ -38,7 +35,7 @@ export class ArticlesListComponent implements OnInit {
     this.error$ = articlesFacade.getError$();
     this.totalArticles$ = articlesFacade.getTotalArticles$();
     this.articlesFacade.setPageSize(this.itemsPerPage);
-    this.dataSource = new CoreDataSource<Article>(this.articlesFacade.getArticles$(), this.articlesFacade.getTotalArticles$(), this.articlesFacade.isUpdating$());
+
   }
 
   ngOnInit() {

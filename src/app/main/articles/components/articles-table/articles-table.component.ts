@@ -22,21 +22,22 @@ export class ArticlesTableComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sorter: MatSort;
 
-  @Input() dataSource: CoreDataSource<Article>;
+  @Input() articles$: Observable<Article[]>;
+  @Input() totalArticles$: Observable<number>;
+  @Input() loading$: Observable<boolean>;
 
 
+  dataSource: CoreDataSource<Article>;
   dataColumns: string[] = ['id', 'title', 'short_description'];
   displayedColumns: string[] = [...this.dataColumns, 'actions']
-  totalArticles: Observable<number>;
-  loading$: Observable<boolean>;
+
 
   pageSizeOptions = [3, 6, 12];
 
   constructor() { }
 
   ngOnInit() {
-    this.totalArticles = this.dataSource.getTotalItems$();
-    this.loading$ = this.dataSource.getIsUpdating$();
+    this.dataSource = new CoreDataSource<Article>(this.articles$);
   }
 
   onEdit(id: number) {

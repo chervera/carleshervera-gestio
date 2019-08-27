@@ -6,8 +6,9 @@
     </div>
     <div class="table">
       <span class="error">error: {{(error$ | async)?.message}}</span>
-      <app-articles-table [dataSource]="dataSource" (edit)="editArticle($event)" (delete)="deleteArticle($event)"
-        (sort)="onSort($event)" (paginate)="onPaginate($event)">
+      <app-articles-table [articles$]="articles$" [totalArticles$]="totalArticles$" [loading$]="isUpdating$"
+        (edit)="editArticle($event)" (delete)="deleteArticle($event)" (sort)="onSort($event)"
+        (paginate)="onPaginate($event)">
       </app-articles-table>
     </div>
     <div class="button-wrapper button-wrapper--right">

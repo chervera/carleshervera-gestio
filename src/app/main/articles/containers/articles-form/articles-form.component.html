@@ -10,6 +10,9 @@
         </mat-form-field>
         <mat-form-field class="form__field-container">
           <input matInput placeholder="Descripció curta" id="short_description" formControlName="short_description">
+          <mat-input-error [control]="form.controls.short_description"
+            [apiError]="(formApiErrors$ | async)?.short_description">
+          </mat-input-error>
         </mat-form-field>
         <mat-form-field class="form__field-container">
           <textarea matInput placeholder="Contingut" id="description" formControlName="description"></textarea>

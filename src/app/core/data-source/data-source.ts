@@ -6,8 +6,6 @@ export class CoreDataSource<T> extends DataSource<T> {
 
   constructor(
     private items$: Observable<T[]>,
-    private totalItems$: Observable<number>,
-    private isUpdating$: Observable<boolean>,
   ) {
     super();
   }
@@ -17,14 +15,6 @@ export class CoreDataSource<T> extends DataSource<T> {
   }
 
   disconnect(collectionViewer: CollectionViewer): void {
-  }
-
-  getIsUpdating$() {
-    return this.isUpdating$;
-  }
-
-  getTotalItems$() {
-    return this.totalItems$;
   }
 
   getItems$() {

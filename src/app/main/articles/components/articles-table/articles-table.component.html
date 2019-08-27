@@ -41,7 +41,7 @@
 
   </mat-table>
 
-  <mat-paginator [length]="totalArticles | async" [pageSize]="itemsPerPage" [pageSizeOptions]="pageSizeOptions"
+  <mat-paginator [length]="totalArticles$ | async" [pageSize]="itemsPerPage" [pageSizeOptions]="pageSizeOptions"
     (page)="onPaginate($event)">
   </mat-paginator>
 
