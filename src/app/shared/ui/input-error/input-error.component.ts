@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PropertyError } from 'src/app/core/error-handler/response-error';
+import { PropertyError } from './input-error';
 
 @Component({
   selector: 'mat-input-error',
@@ -9,6 +9,6 @@ import { PropertyError } from 'src/app/core/error-handler/response-error';
 export class InputErrorComponent {
 
   @Input() control: FormControl;
-  @Input() propertyError: PropertyError;
+  @Input() apiError: PropertyError;
 
 }

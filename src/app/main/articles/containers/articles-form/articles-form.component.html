@@ -5,7 +5,7 @@
       <mat-card-content>
         <mat-form-field class="form__field-container">
           <input matInput placeholder="Títol" id="title" formControlName="title">
-          <mat-input-error [control]="form.controls.title" [propertyError]="(formApiErrors$ | async)?.title">
+          <mat-input-error [control]="form.controls.title" [apiError]="(formApiErrors$ | async)?.title">
           </mat-input-error>
         </mat-form-field>
         <mat-form-field class="form__field-container">

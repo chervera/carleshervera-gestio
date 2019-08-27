@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { ArticlesFacade } from '../../articles.facade';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Tag } from '../../models/tag';
-import { ResponseError, PropertyError } from 'src/app/core/error-handler/response-error';
+import { ResponseError } from 'src/app/core/error-handler/response-error';
 
 @Component({
   selector: 'app-articles-form',
@@ -75,7 +75,6 @@ export class ArticlesFormComponent implements OnInit {
 
   private initForm() {
     this.form = this.buildForm();
-
     this.article$.subscribe(article => {
       if (article) {
         this.form.patchValue(article)
