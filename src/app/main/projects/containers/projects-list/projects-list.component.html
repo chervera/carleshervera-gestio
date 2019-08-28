@@ -1,0 +1,19 @@
+<div class="page">
+  <mat-card>
+    <mat-card-title>{{ 'projects.title' | translate}}</mat-card-title>
+    <div class="button-wrapper button-wrapper--right">
+      <button mat-flat-button color="primary" (click)="onAdd()">Afegir</button>
+    </div>
+    <app-projects-search (search)="onSearch($event)"></app-projects-search>
+    <div class="table">
+      <span class="error">error: {{(error$ | async)?.message}}</span>
+      <app-projects-table [projects$]="projects$" [totalProjects$]="totalProjects$" [loading$]="isUpdating$"
+        (edit)="editProject($event)" (delete)="deleteProject($event)" (sort)="onSort($event)"
+        (paginate)="onPaginate($event)">
+      </app-projects-table>
+    </div>
+    <div class="button-wrapper button-wrapper--right">
+      <button mat-flat-button color="primary" (click)="onExport()">Exportar</button>
+    </div>
+  </mat-card>
+</div>

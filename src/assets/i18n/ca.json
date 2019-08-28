@@ -1,4 +1,7 @@
 {
   "main.title": "Title traduït",
-  "articles.title": "Llistat d'articles"
+  "articles.title": "Llistat d'articles",
+  "projects.title": "Projectes",
+  "projects.search": "Cercar projectes",
+  "button.search": "Buscar"
 }

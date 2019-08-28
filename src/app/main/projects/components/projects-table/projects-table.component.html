@@ -1,0 +1,58 @@
+<div>
+
+  <div class="spinner-container" *ngIf="loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <mat-table [dataSource]="dataSource" matSort (matSortChange)="onSort($event)">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="code">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Codi CTTI. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.code}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Nom </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="responsable">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Responsable </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.responsable}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tecnicResponsable">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Responsable tècnic</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.tecnicResponsable}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>&nbsp; </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div class="button-wrapper">
+          <button mat-flat-button color="primary" (click)="onEdit(element.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-flat-button color="warn" (click)="onDelete(element.id)">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>
+
+  <mat-paginator [length]="totalProjects$ | async" [pageSize]="itemsPerPage" [pageSizeOptions]="pageSizeOptions"
+    (page)="onPaginate($event)">
+  </mat-paginator>
+
+</div>

@@ -1,0 +1,44 @@
+<div class="page">
+  <mat-card class="form">
+    <form *ngIf="project$ | async" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-card-title>Edició Project</mat-card-title>
+      <mat-card-content>
+        <mat-form-field class="form__field-container">
+          <input matInput placeholder="Títol" id="title" formControlName="title">
+          <mat-input-error [control]="form.controls.title" [apiError]="(formApiErrors$ | async)?.title">
+          </mat-input-error>
+        </mat-form-field>
+        <mat-form-field class="form__field-container">
+          <input matInput placeholder="Descripció curta" id="short_description" formControlName="short_description">
+          <mat-input-error [control]="form.controls.short_description"
+            [apiError]="(formApiErrors$ | async)?.short_description">
+          </mat-input-error>
+        </mat-form-field>
+        <mat-form-field class="form__field-container">
+          <textarea matInput placeholder="Contingut" id="description" formControlName="description"></textarea>
+        </mat-form-field>
+        <mat-form-field class="form__field-container">
+          <input matInput [matDatepicker]="created_on" placeholder="Data d'inserció">
+          <mat-datepicker-toggle matSuffix [for]="created_on"></mat-datepicker-toggle>
+          <mat-datepicker #created_on></mat-datepicker>
+        </mat-form-field>
+        <div class="form__field-container">
+          <mat-checkbox matInput formControlName="active">Actiu</mat-checkbox>
+        </div>
+        <mat-form-field class="form__field-container">
+          <input matInput placeholder="Slug" id="slug" formControlName="slug">
+        </mat-form-field>
+        <mat-form-field class="form__field-container">
+          <mat-label>Etiquetes</mat-label>
+          <mat-select formControlName="tags" multiple>
+            <mat-option *ngFor="let tag of tags$ | async" [value]="tag.id">{{tag.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="button-wrapper button-wrapper--right">
+          <button mat-flat-button color="primary">Guardar</button>
+          <button mat-flat-button color="warn" (click)="onCancel()">Cancelar</button>
+        </div>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

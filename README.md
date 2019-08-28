@@ -79,6 +79,9 @@ https://medium.com/@michael.karen/esperando-lo-inesperado-buenas-pr%C3%A1cticas-
   1. - Improve the service.
 1. - Convert state into inmutable state
 1. - Finish and add the module generation schematics.
+  1. - Create crud module
+  1. - Create form from model
+  1. - Create table from model
 1. - Example test
 1. - i18n - Done
 1. - Comprovador que los modelos estén actualizados con la api? vale la pena? es posible?
@@ -98,6 +101,10 @@ https://material.angular.io/
 https://angular-academy.com/angular-jwt/
 
 https://github.com/ngx-translate/core
+
+## Utilities
+
+https://www.npmjs.com/package/query-string
 
 
 ## Development server
