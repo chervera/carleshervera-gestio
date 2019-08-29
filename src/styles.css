@@ -2,60 +2,207 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~bootstrap/dist/css/bootstrap.css";
 
+:root{
+  --main-background-color: #1a3b47;
+  --main-font-color: #fff;
+  --second-background-color: #fff;
+  --second-font-color: #1a3b47;
+  --main-smooth-color: #6399cb;
+  --second-smooth-color: #e8e8e8;
+  --error-color: #f52056;
+  --main-font-family: 'Open Sans', sans-serif;
+}
+
 body{
   padding: 0;
   margin: 0;
-  color: #424242;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  color: var(--main-font-color);
+  font-family: var(--main-font-family);
 }
 
-.page{
-  padding: 0;
+.header{
+  background: var(--main-background-color);
+}
+
+.header .header__title{
+  color: var(--main-font-color);
+  font-size: 22px;
+  padding: 15px 0;
+  display: inline-block;
+}
+.header__menu{
+  float: right;
+}
+
+.menu{
+  background: none;
+  border: none;
+  color: var(--main-font-color);
+  height: 25px;
+  width: 33px;
+  margin: 18px 0;
+  display: block;
   position: relative;
 }
 
-.page::before{
-  content: '';
+.menu span{
   position: absolute;
-  z-index: -1;
-  background: #c5cae9;
-  height: 150px;
+  left: 0;
+  top: 50%;
+  margin-top: -1px;
+  text-indent: -9999px;
+  display: inline-block;
+  background: var(--main-font-color);
+  height: 1px;
   width: 100%;
 }
 
-.form{
-  display: flex;
-  flex-direction: column;
-  padding: 40px;
-}
-
-.form__field-container{
+.menu::after, .menu::before{
+  content: ' ';
+  display: inline-block;
+  background: var(--main-font-color);
+  height: 1px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
 }
 
-.button-wrapper{
-  display: flex;
-  margin: 0 -8px;
-} 
-.button-wrapper > button, .button-wrapper > a{
-  margin: 0 8px;
+.menu::before{
+  bottom: auto;
+  top: 0;
 }
-.button-wrapper.button-wrapper--right{
+
+.page{
+  background: var(--second-background-color);
+  color: var(--second-font-color);
+  padding: 15px 0;
+}
+.page__title{
+  font-size: 20px;
+}
+.page .page__header{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--second-smooth-color);
+  padding-bottom: 8px;
+}
+
+.breadcrums{
+  font-size: 12px;
+}
+.breadcrums .breadcrums__item{
+  display: inline-block;
+  color: var(--main-smooth-color);
+}
+.breadcrums .breadcrums__item[routerLink]{
+  text-decoration: underline;
+}
+
+.breadcrums .breadcrums__item + .breadcrums__item{
+  margin-left: 8px;
+}
+.breadcrums .breadcrums__item + .breadcrums__item::before{
+content: '/';
+margin-right: 8px;
+display: inline-block;
+}
+.page .page__header .breadcrums{
+  align-self: flex-end;
+}
+
+.form{}
+.form .form__content{
+  padding: 8px;
+}
+.form .form__footer{
+  background: #79c5b4;
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+}
+
+.button{
+  border: none;
+  background: none;
+  color: var(--second-font-color);
+  padding: 8px;
+}
+
+.button--primary{
+  background: var(--main-smooth-color);
+  color: #fff;
+}
+.button--error{
+  background: var(--error-color);
+  color: #fff;
+}
+
+.table{}
+
+.table .table__header{
+  display: flex;
+  justify-content: space-between;
+  background: #79c5b4;
+  color: #fff;
+  padding: 8px;
+}
+
+.table .table__title{
+  font-size: 18px;
+  align-self: center;
+}
+.table .table__searcher{
+  background: #a8e2da;
+}
+.table .table__content{
+  border-left: 1px solid #a8e2da;
+  border-right: 1px solid #a8e2da;
+  min-height: 130px;
+}
+.table .table__footer{
+  background: #79c5b4;
+  padding: 8px;
+  display: flex;
   justify-content: flex-end;
 }
 
-.page .mat-card{
-  background: none;
-  margin: 0 40px;
-  padding: 16px 0;
+.table mat-table .mat-column-actions{
+  display: flex;
+  justify-content: flex-end;
+}
+.table mat-cell:last-of-type{
+  padding-right: 8px;
+}
+.table .mat-sort-header-button{
+  font-weight: 700;
 }
 
-.mat-card .mat-card-title{
-  color: #fff;
+.button-wrapper{
+  margin: 0 -4px;
 }
-.mat-card .mat-card-content{
-  background: #fff;
-  padding: 16px;
+.button-wrapper .button{
+  margin: 0 4px;
 }
 
+.searcher{
+  padding: 8px;
+}
+.searcher .searcher__footer{
+  display: flex;
+  justify-content: flex-end;
+}
 
+.field-container{
+  width: 100%;
+}
+
+.spinner-container{
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+.mat-spinner circle{
+  stroke: var(--main-smooth-color);
+}

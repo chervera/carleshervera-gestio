@@ -1,7 +1,13 @@
 {
   "main.title": "Title traduït",
   "articles.title": "Llistat d'articles",
-  "projects.title": "Projectes",
+  "projects.title": "Gestió de projectes",
   "projects.search": "Cercar projectes",
+  "projects.edit": "Edició de projecte",
+  "projects.codi": "Codi",
+  "projects.nom": "Nom",
+  "projects.representant": "Representant",
+  "projects.representantTecnic": "Representant Tècnic",
+  "projects.tamanyDelEquip": "Tamany de l'equip",
   "button.search": "Buscar"
 }

@@ -1,24 +1,23 @@
-<div class="search">
-  <form>
-    <div class="row">
-      <div class="col-12">
-        <span class="search__title">{{ 'projects.search' | translate}}</span>
-      </div>
-      <div class="col-4">
-        <mat-form-field class="form__field-container">
-          <input matInput placeholder="Codi CTTI" id="code" [(ngModel)]="searchProject.code" name="code">
-        </mat-form-field>
-      </div>
-      <div class="col-4">
-        <mat-form-field class="form__field-container">
-          <input matInput placeholder="Nom" id="name" [(ngModel)]="searchProject.name" name="name">
-        </mat-form-field>
-      </div>
-      <div class="col-12">
-        <div class="button-wrapper button-wrapper--right">
-          <button mat-flat-button color="primary" (click)="onSearch()">{{ 'button.search' | translate}}</button>
+<div class="searcher">
+  <div class="searcher__header">
+    <form>
+      <div class="row">
+        <div class="col-4">
+          <mat-form-field class="field-container">
+            <input matInput placeholder="Codi CTTI" id="code" [(ngModel)]="searchProject.code" name="code">
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="field-container">
+            <input matInput placeholder="Nom" id="name" [(ngModel)]="searchProject.name" name="name">
+          </mat-form-field>
         </div>
       </div>
+    </form>
+  </div>
+  <div class="searcher__footer">
+    <div class="button-wrapper">
+      <button class="button button--primary" (click)="onSearch()">{{ 'button.search' | translate}}</button>
     </div>
-  </form>
+  </div>
 </div>

@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { ProjectsFacade } from '../../projects.facade';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ResponseError } from 'src/app/core/error-handler/response-error';
+import { MasterFacade } from 'src/app/main/master/master.facade';
+import { Master } from 'src/app/main/master/models/master';
 
 @Component({
   selector: 'app-projects-form',
@@ -15,6 +17,7 @@ import { ResponseError } from 'src/app/core/error-handler/response-error';
 export class ProjectsFormComponent implements OnInit {
 
   project$: Observable<Project>;
+  departments$: Observable<Master[]>;
   formApiErrors$: Observable<ResponseError>
 
   isUpdating$: Observable<boolean>;
@@ -26,15 +29,18 @@ export class ProjectsFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private projectsFacade: ProjectsFacade,
+    private masterFacade: MasterFacade,
     private formBuilder: FormBuilder,
   ) {
     this.isUpdating$ = projectsFacade.isUpdating$();
     this.project$ = this.projectsFacade.getProject$();
+    this.departments$ = this.masterFacade.getDepartments$()
     this.isCompleted$ = this.projectsFacade.isCompleted$();
   }
 
   ngOnInit() {
     this.initProject();
+    this.initMasters();
     this.initForm();
     this.isCompletedSubscription();
     this.errorFormSubscription();
@@ -62,6 +68,10 @@ export class ProjectsFormComponent implements OnInit {
     } else {
       this.newProject();
     }
+  }
+
+  private initMasters() {
+    this.masterFacade.loadDepartments();
   }
 
   private initForm() {
@@ -109,7 +119,7 @@ export class ProjectsFormComponent implements OnInit {
   }
 
   private goToList(): void {
-    this.router.navigate(['projects']);
+    this.router.navigate(['projectes']);
   }
 
   private buildForm() {

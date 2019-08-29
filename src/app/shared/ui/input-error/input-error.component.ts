@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { PropertyError } from './input-error';
 
 @Component({
-  selector: 'mat-input-error',
+  selector: 'app-input-error',
   templateUrl: './input-error.component.html',
 })
 export class InputErrorComponent {

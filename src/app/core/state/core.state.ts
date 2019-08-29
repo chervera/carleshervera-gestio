@@ -3,6 +3,7 @@ import { ArticlesState } from 'src/app/main/articles/state/articles.state';
 import { State } from './state';
 import { AuthState } from 'src/app/core/state/auth.state';
 import { ProjectsState } from 'src/app/main/projects/state/projects.state';
+import { MasterState } from 'src/app/main/master/state/master.state';
 
 
 @Injectable({
@@ -15,6 +16,7 @@ export class CoreState extends State {
   }
 
   auth: AuthState = new AuthState();
+  master: MasterState = new MasterState();
   articles: ArticlesState = new ArticlesState();
   projects: ProjectsState = new ProjectsState();
 

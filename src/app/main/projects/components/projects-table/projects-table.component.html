@@ -1,11 +1,8 @@
 <div>
-
   <div class="spinner-container" *ngIf="loading$ | async">
     <mat-spinner></mat-spinner>
   </div>
-
   <mat-table [dataSource]="dataSource" matSort (matSortChange)="onSort($event)">
-
     <!-- Position Column -->
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header> ID. </mat-header-cell>
@@ -36,12 +33,8 @@
       <mat-header-cell *matHeaderCellDef>&nbsp; </mat-header-cell>
       <mat-cell *matCellDef="let element">
         <div class="button-wrapper">
-          <button mat-flat-button color="primary" (click)="onEdit(element.id)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-flat-button color="warn" (click)="onDelete(element.id)">
-            <mat-icon>delete_forever</mat-icon>
-          </button>
+          <button class="button button--primary" (click)="onEdit(element.id)">Editar</button>
+          <button class="button button--error" color="warn" (click)="onDelete(element.id)">Eliminar</button>
         </div>
       </mat-cell>
     </ng-container>

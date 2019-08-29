@@ -18,9 +18,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ExportModule } from 'src/app/shared/export/export.module';
 import { UiModule } from 'src/app/shared/ui/ui.module';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectModule, MatSelect } from '@angular/material/select';
 import { CoreModule } from 'src/app/core/core.module';
 import { ProjectsSearchComponent } from './components/projects-search/projects-search.component';
+import { MasterModule } from '../master/master.module';
 
 
 
@@ -42,14 +43,15 @@ import { ProjectsSearchComponent } from './components/projects-search/projects-s
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatSelectModule,
     MatDatepickerModule,
     MatCheckboxModule,
     MatButtonModule,
     MatPaginatorModule,
     MatSortModule,
     ExportModule,
-    MatSelectModule,
-    UiModule
+    UiModule,
+    MasterModule
   ]
 })
 export class ProjectsModule { }
