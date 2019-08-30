@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ResponseError } from 'src/app/core/error-handler/response-error';
 import { MasterFacade } from 'src/app/main/master/master.facade';
 import { Master } from 'src/app/main/master/models/master';
+import { NotificationService } from 'src/app/core/notification/notification.service';
 
 @Component({
   selector: 'app-projects-form',
@@ -31,6 +32,7 @@ export class ProjectsFormComponent implements OnInit {
     private projectsFacade: ProjectsFacade,
     private masterFacade: MasterFacade,
     private formBuilder: FormBuilder,
+    private notificationService: NotificationService
   ) {
     this.isUpdating$ = projectsFacade.isUpdating$();
     this.project$ = this.projectsFacade.getProject$();
@@ -92,7 +94,9 @@ export class ProjectsFormComponent implements OnInit {
   }
 
   saveNewProject(project: Project) {
-    this.projectsFacade.saveNewProject(project);
+    this.projectsFacade.saveNewProject(project).subscribe(
+      () => this.notificationService.showSuccess('projecte insertat correctament')
+    );
   }
 
   saveUpdateProject(project: Project) {
