@@ -9,6 +9,7 @@ import { ExportService } from 'src/app/shared/export/export.service';
 import { ProjectsTableComponent } from '../../components/projects-table/projects-table.component';
 import { tap, take } from 'rxjs/operators';
 import { SearchProject } from '../../models/search-project';
+import { NotificationService } from 'src/app/core/notification/notification.service';
 
 @Component({
   selector: 'app-projects',
@@ -28,7 +29,8 @@ export class ProjectsListComponent implements OnInit {
   constructor(
     private projectsFacade: ProjectsFacade,
     private router: Router,
-    private exportService: ExportService
+    private exportService: ExportService,
+    private notificationService: NotificationService
   ) {
     this.isUpdating$ = projectsFacade.isUpdating$();
     this.projects$ = projectsFacade.getProjects$();
@@ -43,7 +45,7 @@ export class ProjectsListComponent implements OnInit {
   }
 
   onAdd() {
-    this.router.navigate(['projects/new']);
+    this.router.navigate(['projectes/new']);
   }
 
   onExport() {
@@ -61,7 +63,9 @@ export class ProjectsListComponent implements OnInit {
   }
 
   deleteProject(id: number) {
-    this.projectsFacade.deleteProject(id);
+    this.projectsFacade.deleteProject(id).subscribe(
+      () => this.notificationService.showSuccess('Eliminat correctament'),
+    );
   }
 
   onPaginate(page: PageEvent) {

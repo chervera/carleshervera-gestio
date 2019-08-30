@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ProjectsApi } from './api/projects.api';
 import { Observable } from 'rxjs';
 import { Project } from './models/project';
-import { tap, take, finalize, map, filter } from 'rxjs/operators';
+import { tap, take, finalize, map, filter, catchError } from 'rxjs/operators';
 import { CoreState } from 'src/app/core/state/core.state';
 import { HttpResponse } from '@angular/common/http';
 import { ResponseError } from 'src/app/core/error-handler/response-error';
@@ -135,10 +135,9 @@ export class ProjectsFacade {
     this.state.projects.setSelectedId(id);
   }
 
-  deleteProject(id: number) {
-    this.projectsApi.delete(id).subscribe(
-      () => this.loadProjects(),
-      (error) => console.error(error)
+  deleteProject(id: number): Observable<void> {
+    return this.projectsApi.delete(id).pipe(
+      tap(() => this.loadProjects())
     );
   }
 

@@ -17,22 +17,22 @@
         <div class="form__content">
           <div class="row">
             <div class="col-3">
-              <mat-form-field class="form__field-container">
-                <input matInput placeholder="{{ 'projects.codi' | translate}}" id="code" formControlName="code">
+              <mat-form-field class="field-container">
+                <input matInput placeholder="{{ 'project.codi' | translate}}" id="code" formControlName="code">
                 <app-input-error [control]="form.controls.code" [apiError]="(formApiErrors$ | async)?.code">
                 </app-input-error>
               </mat-form-field>
             </div>
             <div class="col-3">
-              <mat-form-field class="form__field-container">
-                <input matInput placeholder="{{ 'projects.nom' | translate}}" id="name" formControlName="name">
+              <mat-form-field class="field-container">
+                <input matInput placeholder="{{ 'project.nom' | translate}}" id="name" formControlName="name">
                 <app-input-error [control]="form.controls.name" [apiError]="(formApiErrors$ | async)?.name">
                 </app-input-error>
               </mat-form-field>
             </div>
             <div class="col-3">
-              <mat-form-field class="form__field-container">
-                <input matInput placeholder="{{ 'projects.responsable' | translate}}" id="responsable"
+              <mat-form-field class="field-container">
+                <input matInput placeholder="{{ 'project.responsable' | translate}}" id="responsable"
                   formControlName="responsable">
                 <app-input-error [control]="form.controls.responsable"
                   [apiError]="(formApiErrors$ | async)?.responsable">
@@ -40,8 +40,8 @@
               </mat-form-field>
             </div>
             <div class="col-3">
-              <mat-form-field class="form__field-container">
-                <input matInput placeholder="{{ 'projects.responsableTecnic' | translate}}" id="responsable"
+              <mat-form-field class="field-container">
+                <input matInput placeholder="{{ 'project.responsableTecnic' | translate}}" id="responsable"
                   formControlName="tecnicResponsable">
                 <app-input-error [control]="form.controls.tecnicResponsable"
                   [apiError]="(formApiErrors$ | async)?.tecnicResponsable">
@@ -49,8 +49,8 @@
               </mat-form-field>
             </div>
             <div class="col-3">
-              <mat-form-field class="form__field-container">
-                <mat-select placeholder="{{ 'projects.departament' | translate}}" id="department"
+              <mat-form-field class="field-container">
+                <mat-select placeholder="{{ 'project.departament' | translate}}" id="department"
                   formControlName="department">
                   <mat-option [value]=""></mat-option>
                   <mat-option *ngFor="let item of departments$ | async" [value]="item.id">
@@ -62,20 +62,277 @@
               </mat-form-field>
             </div>
             <div class="col-3">
-              <mat-form-field class="form__field-container">
-                <input matInput placeholder="{{ 'projects.codiINAP' | translate}}" id="responsable"
+              <mat-form-field class="field-container">
+                <input matInput placeholder="{{ 'project.codiINAP' | translate}}" id="codiINAP"
                   formControlName="codeINAP">
                 <app-input-error [control]="form.controls.codeINAP" [apiError]="(formApiErrors$ | async)?.codeINAP">
                 </app-input-error>
               </mat-form-field>
             </div>
             <div class="col-3">
-              <mat-form-field class="form__field-container">
-                <input matInput placeholder="{{ 'projects.tamanyDelEquip' | translate}}" id="responsable"
+              <mat-form-field class="field-container">
+                <input matInput placeholder="{{ 'project.tamanyDelEquip' | translate}}" id="teamSize"
                   formControlName="teamSize">
                 <app-input-error [control]="form.controls.teamSize" [apiError]="(formApiErrors$ | async)?.teamSize">
                 </app-input-error>
               </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="field-container">
+                <input matInput placeholder="{{ 'project.database' | translate}}" id="database"
+                  formControlName="database">
+                <app-input-error [control]="form.controls.database" [apiError]="(formApiErrors$ | async)?.database">
+                </app-input-error>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <div class="field-container">
+                <mat-checkbox matInput formControlName="responsive">{{ 'project.responsive' | translate}}</mat-checkbox>
+                <app-input-error [control]="form.controls.responsive" [apiError]="(formApiErrors$ | async)?.responsive">
+                </app-input-error>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="field-container">
+                <mat-checkbox matInput formControlName="mobileApp">{{ 'project.mobileApp' | translate}}</mat-checkbox>
+                <app-input-error [control]="form.controls.mobileApp" [apiError]="(formApiErrors$ | async)?.mobileApp">
+                </app-input-error>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="field-container">
+                <mat-checkbox matInput formControlName="dblink">{{ 'project.dblink' | translate}}</mat-checkbox>
+                <app-input-error [control]="form.controls.dblink" [apiError]="(formApiErrors$ | async)?.dblink">
+                </app-input-error>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="field-container">
+                <mat-checkbox matInput formControlName="webservice">{{ 'project.webservice' | translate}}
+                </mat-checkbox>
+                <app-input-error [control]="form.controls.webservice" [apiError]="(formApiErrors$ | async)?.webservice">
+                </app-input-error>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="field-container">
+                <mat-checkbox matInput formControlName="ldap">{{ 'project.ldap' | translate}}</mat-checkbox>
+                <app-input-error [control]="form.controls.ldap" [apiError]="(formApiErrors$ | async)?.ldap">
+                </app-input-error>
+              </div>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="field-container">
+                <input matInput placeholder="{{ 'project.minBrowser' | translate}}" id="minBrowser"
+                  formControlName="minBrowser">
+                <app-input-error [control]="form.controls.minBrowser" [apiError]="(formApiErrors$ | async)?.minBrowser">
+                </app-input-error>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="field-container">
+                <input matInput placeholder="{{ 'project.accessLogs' | translate}}" id="accessLogs"
+                  formControlName="accessLogs">
+                <app-input-error [control]="form.controls.accessLogs" [apiError]="(formApiErrors$ | async)?.accessLogs">
+                </app-input-error>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="field-container">
+                <input matInput placeholder="{{ 'project.deployFrequency' | translate}}" id="deployFrequency"
+                  formControlName="deployFrequency">
+                <app-input-error [control]="form.controls.deployFrequency"
+                  [apiError]="(formApiErrors$ | async)?.deployFrequency">
+                </app-input-error>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="field-container">
+                <input matInput placeholder="{{ 'project.repositorySIC' | translate}}" id="repositorySIC"
+                  formControlName="repositorySIC">
+                <app-input-error [control]="form.controls.repositorySIC"
+                  [apiError]="(formApiErrors$ | async)?.repositorySIC">
+                </app-input-error>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="field-container">
+                <input matInput placeholder="{{ 'project.repositoryIndra' | translate}}" id="repositoryIndra"
+                  formControlName="repositoryIndra">
+                <app-input-error [control]="form.controls.repositoryIndra"
+                  [apiError]="(formApiErrors$ | async)?.repositoryIndra">
+                </app-input-error>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="field-container">
+                <input matInput placeholder="{{ 'project.automaticDeploy' | translate}}" id="automaticDeploy"
+                  formControlName="automaticDeploy">
+                <app-input-error [control]="form.controls.automaticDeploy"
+                  [apiError]="(formApiErrors$ | async)?.automaticDeploy">
+                </app-input-error>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <div class="field-container">
+                <mat-checkbox matInput formControlName="gicar">{{ 'project.gicar' | translate}}</mat-checkbox>
+                <app-input-error [control]="form.controls.gicar" [apiError]="(formApiErrors$ | async)?.gicar">
+                </app-input-error>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="field-container">
+                <mat-checkbox matInput formControlName="valid">{{ 'project.valid' | translate}}</mat-checkbox>
+                <app-input-error [control]="form.controls.valid" [apiError]="(formApiErrors$ | async)?.valid">
+                </app-input-error>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="field-container">
+                <mat-checkbox matInput formControlName="pica">{{ 'project.pica' | translate}}</mat-checkbox>
+                <app-input-error [control]="form.controls.pica" [apiError]="(formApiErrors$ | async)?.pica">
+                </app-input-error>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="field-container">
+                <mat-checkbox matInput formControlName="ecopia">{{ 'project.ecopia' | translate}}</mat-checkbox>
+                <app-input-error [control]="form.controls.ecopia" [apiError]="(formApiErrors$ | async)?.ecopia">
+                </app-input-error>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="field-container">
+                <mat-checkbox matInput formControlName="sarcat">{{ 'project.sarcat' | translate}}</mat-checkbox>
+                <app-input-error [control]="form.controls.sarcat" [apiError]="(formApiErrors$ | async)?.sarcat">
+                </app-input-error>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="field-container">
+                <mat-checkbox matInput formControlName="smtp">{{ 'project.smtp' | translate}}</mat-checkbox>
+                <app-input-error [control]="form.controls.smtp" [apiError]="(formApiErrors$ | async)?.smtp">
+                </app-input-error>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="field-container">
+                <mat-checkbox matInput formControlName="problems">{{ 'project.problems' | translate}}</mat-checkbox>
+                <app-input-error [control]="form.controls.problems" [apiError]="(formApiErrors$ | async)?.problems">
+                </app-input-error>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="panel panel--primary">
+                <div class="row">
+                  <div class="col-12">
+                    <span class="panel__title">Tecnología .NET</span>
+                  </div>
+                  <div class="col-3">
+                    <mat-form-field class="field-container">
+                      <input matInput placeholder="{{ 'project.netFramework' | translate}}" id="netFramework"
+                        formControlName="netFramework">
+                      <app-input-error [control]="form.controls.netFramework"
+                        [apiError]="(formApiErrors$ | async)?.netFramework">
+                      </app-input-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-3">
+                    <mat-form-field class="field-container">
+                      <input matInput placeholder="{{ 'project.netIde' | translate}}" id="netIde"
+                        formControlName="netIde">
+                      <app-input-error [control]="form.controls.netIde" [apiError]="(formApiErrors$ | async)?.netIde">
+                      </app-input-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-3">
+                    <mat-form-field class="field-container">
+                      <input matInput placeholder="{{ 'project.netEntityFramework' | translate}}"
+                        id="netEntityFramework" formControlName="netEntityFramework">
+                      <app-input-error [control]="form.controls.netEntityFramework"
+                        [apiError]="(formApiErrors$ | async)?.netEntityFramework">
+                      </app-input-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="panel panel--secondary">
+                <div class="row">
+                  <div class="col-12">
+                    <span class="panel__title">Tecnología Java</span>
+                  </div>
+                  <div class="col-3">
+                    <mat-form-field class="field-container">
+                      <input matInput placeholder="{{ 'project.javaIde' | translate}}" id="javaIde"
+                        formControlName="javaIde">
+                      <app-input-error [control]="form.controls.javaIde" [apiError]="(formApiErrors$ | async)?.javaIde">
+                      </app-input-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-3">
+                    <mat-form-field class="field-container">
+                      <input matInput placeholder="{{ 'project.javaCanigoVersion' | translate}}" id="javaCanigoVersion"
+                        formControlName="javaCanigoVersion">
+                      <app-input-error [control]="form.controls.javaCanigoVersion"
+                        [apiError]="(formApiErrors$ | async)?.javaCanigoVersion">
+                      </app-input-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-3">
+                    <mat-form-field class="field-container">
+                      <input matInput placeholder="{{ 'project.javaFramework' | translate}}" id="javaFramework"
+                        formControlName="javaFramework">
+                      <app-input-error [control]="form.controls.javaFramework"
+                        [apiError]="(formApiErrors$ | async)?.javaFramework">
+                      </app-input-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="panel panel--third">
+                <div class="row">
+                  <div class="col-12">
+                    <span class="panel__title">Tecnología JavaScript</span>
+                  </div>
+                  <div class="col-3">
+                    <mat-form-field class="field-container">
+                      <input matInput placeholder="{{ 'project.jsIde' | translate}}" id="jsIde" formControlName="jsIde">
+                      <app-input-error [control]="form.controls.jsIde" [apiError]="(formApiErrors$ | async)?.jsIde">
+                      </app-input-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-3">
+                    <div class="field-container">
+                      <mat-checkbox matInput formControlName="jsAngular">{{ 'project.jsAngular' | translate}}
+                      </mat-checkbox>
+                      <app-input-error [control]="form.controls.jsAngular"
+                        [apiError]="(formApiErrors$ | async)?.jsAngular">
+                      </app-input-error>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="field-container">
+                      <mat-checkbox matInput formControlName="jsAngularJS">{{ 'project.jsAngularJS' | translate}}
+                      </mat-checkbox>
+                      <app-input-error [control]="form.controls.jsAngularJS"
+                        [apiError]="(formApiErrors$ | async)?.jsAngularJS">
+                      </app-input-error>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <mat-form-field class="field-container">
+                  <textarea matInput placeholder="{{ 'project.problems' | translate}}" id="problems"
+                    formControlName="problems"></textarea>
+                  <app-input-error [control]="form.controls.problems" [apiError]="(formApiErrors$ | async)?.problems">
+                  </app-input-error>
+                </mat-form-field>
+              </div>
             </div>
           </div>
         </div>

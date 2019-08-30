@@ -11,9 +11,9 @@ export class Project {
   mobileApp: boolean;
   dblink: boolean;
   webservice: boolean;
-  database: boolean;
+  database: number;
   ldap: boolean;
-  minBrowser: number;
+  minBrowser: string;
   accessLogs: number;
   deployFrequency: number;
   repositorySIC: number;

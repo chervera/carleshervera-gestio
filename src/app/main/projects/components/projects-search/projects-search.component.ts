@@ -22,4 +22,9 @@ export class ProjectsSearchComponent implements OnInit {
     this.search.emit(this.searchProject);
   }
 
+  onReset() {
+    this.searchProject = new SearchProject();
+    this.onSearch();
+  }
+
 }
