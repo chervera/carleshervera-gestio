@@ -9,6 +9,8 @@ import { ResponseError } from 'src/app/core/error-handler/response-error';
 import { MasterFacade } from 'src/app/main/master/master.facade';
 import { Master } from 'src/app/main/master/models/master';
 import { NotificationService } from 'src/app/core/notification/notification.service';
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-projects-form',
@@ -32,7 +34,9 @@ export class ProjectsFormComponent implements OnInit {
     private projectsFacade: ProjectsFacade,
     private masterFacade: MasterFacade,
     private formBuilder: FormBuilder,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private translateService: TranslateService
+
   ) {
     this.isUpdating$ = projectsFacade.isUpdating$();
     this.project$ = this.projectsFacade.getProject$();
@@ -95,12 +99,14 @@ export class ProjectsFormComponent implements OnInit {
 
   saveNewProject(project: Project) {
     this.projectsFacade.saveNewProject(project).subscribe(
-      () => this.notificationService.showSuccess('projecte insertat correctament')
+      () => this.notificationService.showSuccess(this.translateService.instant('projects.messages.insert.sucess'))
     );
   }
 
   saveUpdateProject(project: Project) {
-    this.projectsFacade.saveUpdateProject(project);
+    this.projectsFacade.saveUpdateProject(project).subscribe(
+      () => this.notificationService.showSuccess(this.translateService.instant('projects.messages.update.sucess'))
+    )
   }
 
   saveProject() {

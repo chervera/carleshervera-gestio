@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ProjectsApi } from './api/projects.api';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Project } from './models/project';
 import { tap, take, finalize, map, filter, catchError } from 'rxjs/operators';
 import { CoreState } from 'src/app/core/state/core.state';
@@ -101,29 +101,38 @@ export class ProjectsFacade {
     this.state.projects.setProject(new Project());
   }
 
-  saveNewProject(project: Project) {
+  saveNewProject(project: Project): Observable<Project> {
     this.state.projects.setUpdating(true);
     this.state.projects.setCompleted(null);
-    this.projectsApi.create(project).subscribe(
-      () => {
-        this.state.projects.setProject(project);
-        this.state.projects.setCompleted('Project afegit correctament');
-      },
-      (error) => this.state.projects.setFormError(error.error),
-      () => this.state.projects.setUpdating(false)
+    return this.projectsApi.create(project).pipe(
+      take(1),
+      tap(
+        () => {
+          this.state.projects.setProject(project);
+          this.state.projects.setCompleted('Project afegit correctament');
+        }),
+      catchError((error) => {
+        this.state.projects.setFormError(error.error);
+        return of(error);
+      }),
+      finalize(() => this.state.projects.setUpdating(false))
     );
   }
 
   saveUpdateProject(project: Project) {
     this.state.projects.setUpdating(true);
 
-    this.projectsApi.update(project).subscribe(
-      () => {
+    return this.projectsApi.update(project).pipe(
+      take(1),
+      tap(() => {
         this.state.projects.setProject(project);
         this.state.projects.setCompleted('Project modificat correctament');
-      },
-      (error) => console.error(error),
-      () => this.state.projects.setUpdating(false)
+      }),
+      catchError((error) => {
+        this.state.projects.setFormError(error.error);
+        return of(error);
+      }),
+      finalize(() => this.state.projects.setUpdating(false))
     );
   }
 

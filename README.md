@@ -37,6 +37,7 @@ Los módulos de negocio estarán compuestos de las siguientes carpetas:
 1. **routing** - Las rutas del modulo. Como mínimo una por container.
 
 1. **facade** - Este será el servicio que comunica nuestros containers con el estado y la api. Es el que será inyectado a nuestros containers.
+Los metodos que requieran trabajar con obserbables, los devolveran sin ejecutar, solo con pipes de tratamiento de los datos necesarios y así el tratamiento de los errores o de los mensajes de éxito se encargarçan los componentes de vista.
 
 1. **module** - El fichero de definición del módulo. Todos tienen que importar el CoreModule.
 
@@ -57,6 +58,10 @@ En el modulo core, hay una carpeta error-handler con los servicios necesarios pa
 
 
 https://medium.com/@michael.karen/esperando-lo-inesperado-buenas-pr%C3%A1cticas-para-el-manejo-de-errores-en-angular-dc578da68ef9
+
+## Normas de estilo de código
+
+1. - Las funciones que sean llamadas desde eventos de componentes serán nombrarán del tipo on + Accion. ej. onSubmit(), onSave() onDelete().
 
 ## TODO:
 

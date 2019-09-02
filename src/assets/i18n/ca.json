@@ -30,6 +30,8 @@
   "project.sarcat": "S@arcat",
   "project.smtp": "SMTP",
   "project.problems": "Observacions / Problemes detectats",
+  "projects.messages.update.sucess": "El projecte s'ha modificat correctament",
+  "projects.messages.insert.sucess": "El projecte s'ha insertat correctament",
   "button.search": "Buscar",
   "button.reset": "Resetejar"
 }

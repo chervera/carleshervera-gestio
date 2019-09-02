@@ -23,7 +23,8 @@
   --color-aux-6:#7874b4;
   --color-aux-6-light:#bbb9da;
 
-  --error-color: #f52056;
+  --color-error: #f52056;
+  --color-success: var(--color-aux-4-light);
 
   --font-color: var(--color-main-1); 
   --font-color-negative: #fff;
@@ -145,7 +146,6 @@ display: inline-block;
   align-self: flex-end;
 }
 
-.form{}
 .form .form__content{
   padding:var(--distance-m);
 }
@@ -176,11 +176,10 @@ display: inline-block;
   color: #fff;
 }
 .button--error{
-  background: var(--error-color);
+  background: var(--color-error);
   color: #fff;
 }
 
-.table{}
 .table .table__header{
   display: flex;
   justify-content: space-between;
@@ -277,4 +276,16 @@ display: inline-block;
 }
 .panel.panel--third .panel__title{
   border-color: var(--color-aux-6);
+}
+
+.mat-snack-bar-container.success{
+  background: var(--color-success);
+  color: var(--font-color);
+}
+.mat-snack-bar-container.error{
+  background: var(--color-error);
+  color: var(--font-color);
+}
+.mat-snack-bar-container.error .mat-button{
+  color: var(--font-color);
 }
