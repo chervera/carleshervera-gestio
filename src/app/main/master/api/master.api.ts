@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Master } from '../models/master';
 import { Observable } from 'rxjs';
 import { Api } from 'src/app/core/auth/api/api';
+import { Cacheable } from 'ngx-cacheable';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,7 @@ export class MasterApi extends Api {
     super();
   }
 
+  @Cacheable()
   getDepartments(): Observable<Master[]> {
     return this.http.get<Master[]>(this.URL_API + this.API_DEPARTMENT);
   }

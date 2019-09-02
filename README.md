@@ -22,7 +22,8 @@ Aquí es donde distribuiremos todos los modulos del negocio de la aplicación.
 #### módulos negocio
 Los módulos de negocio estarán compuestos de las siguientes carpetas:
 
-1. **api** - En esta carpeta se encontrarán los servicios de acceso a la api si el modulo en cuestión acceda a alguna api.
+1. **api** - En esta carpeta se encontrarán los servicios de acceso a la api si el modulo en cuestión acceda a alguna api. Si la petición a la api es cacheable se usará el decorador Cacheable
+https://www.npmjs.com/package/ngx-cacheable
 
 1. **components** - En esta carpeta irán los componentes "tontos". Serán componentes puros, que solo accederán a datos que les entren por @Inputs. De esta forma serán muy reutilizables, mantenibles y facilmente testeables. Los que creamos necesarios, serán exportados para que otros modulos los puedan usar. Es obligatorio poner la detección de cambios en onPush ChangeDetectionStrategy.OnPush
 

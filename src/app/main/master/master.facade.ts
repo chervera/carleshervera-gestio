@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { finalize, shareReplay } from 'rxjs/operators';
+import { finalize, shareReplay, take } from 'rxjs/operators';
 import { MasterApi } from './api/master.api';
 import { CoreState } from 'src/app/core/state/core.state';
 import { Master } from './models/master';
@@ -19,7 +19,7 @@ export class MasterFacade {
     this.state.master.setUpdating(true);
     this.masterApi.getDepartments()
       .pipe(
-        shareReplay(100),
+        take(1),
         finalize(() => this.state.master.setUpdating(false))
       ).subscribe(
         (items: Master[]) => this.setDepartments(items),
