@@ -19,7 +19,7 @@ export class MasterFacade {
     this.state.master.setUpdating(true);
     this.masterApi.getDepartments()
       .pipe(
-        shareReplay(1),
+        shareReplay(100),
         finalize(() => this.state.master.setUpdating(false))
       ).subscribe(
         (items: Master[]) => this.setDepartments(items),

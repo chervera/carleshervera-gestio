@@ -145,7 +145,12 @@ display: inline-block;
 .page .page__header .breadcrums{
   align-self: flex-end;
 }
-
+.form .form__header{
+  background: var(--color-aux-2);
+  display: flex;
+  justify-content: flex-end;
+  padding:var(--distance-m);
+}
 .form .form__content{
   padding:var(--distance-m);
 }

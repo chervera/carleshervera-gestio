@@ -68,8 +68,8 @@ https://medium.com/@michael.karen/esperando-lo-inesperado-buenas-pr%C3%A1cticas-
 
 1. - The JWT authentication - Done
   1. - Fer que guardi el token en una cookie un ratet
-1. - A HTML layout - refer-lo per a que moli una mica més
-  1. - Bootstrap 4
+1. - A HTML layout - refer-lo per a que moli una mica més - Done
+  1. - Bootstrap 4 - Done
   1. - Icon font
 1. - Millores de codi
   1. - Definir les apis de forma relativa, utilitzar un proxy

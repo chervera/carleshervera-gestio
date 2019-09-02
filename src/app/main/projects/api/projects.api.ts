@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
-
 import { Observable } from 'rxjs';
 import { Project } from '../models/project';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
-import { Sort } from '@angular/material/sort';
-import { PageEvent } from '@angular/material/paginator';
 import { SearchProject } from '../models/search-project';
-import { query } from '@angular/animations';
+import { Api } from 'src/app/core/auth/api/api';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectsApi {
+export class ProjectsApi extends Api {
 
-  readonly API = 'http://localhost:4321/ws/projects';
-  readonly API_ERROR = 'http://localhost:4321/ws/error';
-  readonly HEADER_TOTAL_ITEMS = 'X-Total-Count';
+  readonly API = this.URL_API + 'projects';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   getProjects(page: number = 0, pageSize: number = 10, sortField: string = '', sortDirection: string = '', searchProject: SearchProject = null): Observable<HttpResponse<Project[]>> {
     let queryParams = new HttpParams()
@@ -50,7 +48,7 @@ export class ProjectsApi {
   }
 
   create(project: Project): Observable<Project> {
-    return this.http.post<Project>(this.API_ERROR, project);
+    return this.http.post<Project>(this.API, project);
   }
 
   update(project: Project): Observable<Project> {

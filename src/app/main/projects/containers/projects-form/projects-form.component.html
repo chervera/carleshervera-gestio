@@ -14,6 +14,12 @@
     </div>
     <form *ngIf="project$ | async" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form">
+        <div class="form__header">
+          <div class="button-wrapper">
+            <button class="button button--primary" (click)="onSubmit()">Guardar</button>
+            <button class="button button--error" (click)="onCancel()">Cancelar</button>
+          </div>
+        </div>
         <div class="form__content">
           <div class="row">
             <div class="col-3">
