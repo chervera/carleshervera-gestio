@@ -45,8 +45,15 @@ Los metodos que requieran trabajar con obserbables, los devolveran sin ejecutar,
 ### Traducciones y i18n
 El modulo de traducciones no es necesario importarlo ya que esta inicializado en el modulo Core que todos los modulos importan.
 
+Al realizar traducciones desde componentes, se usará el servicio. Este tiene 2 metodos para traducir, el get que devuelve un observable, ya que espera que tengta las traducciones cargadas y el instant, que no espera.
+
 Las traducciones estan en formato JSON en la raiz del proyecto.
-https://github.com/ngx-translate/core
+https://github.com/ngx-translate/core.
+
+### Proxy
+Hay un proxy definido para las redirecciones de la api. Está en el fichero proxy.conf.json.
+Es interesante la propiedad logDebug, que nos permite ver los errores de redirecciones. Por defecto es "info".
+https://github.com/angular/angular-cli/blob/master/docs/documentation/stories/proxy.md
 
 ### Error handler
 
@@ -66,7 +73,6 @@ https://medium.com/@michael.karen/esperando-lo-inesperado-buenas-pr%C3%A1cticas-
 
 ## TODO:
 
-
 1. - The JWT authentication - Done
   1. - Fer que guardi el token en una cookie un ratet
 1. - A HTML layout - refer-lo per a que moli una mica més - Done
@@ -74,8 +80,9 @@ https://medium.com/@michael.karen/esperando-lo-inesperado-buenas-pr%C3%A1cticas-
   1. - Icon font
 1. - Millores de codi
   1. - Definir les apis de forma relativa, utilitzar un proxy
-    1. - En les apis que consultin temes que han de ser cachejats utilitzar l'operador rxJS shareReplay
+    1. - Cache api - Done - https://www.npmjs.com/package/ngx-cacheable
   1. - Crear les clases base que toquin al core.
+    1. - API - Done
 1. - Validacions i formularis
   1. - Crear component de show errors genèric. - Done
   1. - Handle errors.
@@ -91,7 +98,6 @@ https://medium.com/@michael.karen/esperando-lo-inesperado-buenas-pr%C3%A1cticas-
   1. - Create translation from model
 1. - Example test
 1. - i18n - Done
-1. - Comprovador que los modelos estén actualizados con la api? vale la pena? es posible?
 
 ## A comentar con el equipo de arquitetura
 1. modulos shared

@@ -294,3 +294,17 @@ display: inline-block;
 .mat-snack-bar-container.error .mat-button{
   color: var(--font-color);
 }
+
+.login{
+  background: var(--color-aux-2-light);
+  width: 400px;
+  padding: var(--distance-l);
+  margin: var(--distance-l) auto 0 auto;
+  
+}
+.login input:-webkit-autofill,
+.login input:-webkit-autofill:hover, 
+.login input:-webkit-autofill:focus, 
+.login input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px var(--color-aux-2-light) inset !important;
+}
