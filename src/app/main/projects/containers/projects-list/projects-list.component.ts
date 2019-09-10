@@ -10,6 +10,7 @@ import { ProjectsTableComponent } from '../../components/projects-table/projects
 import { tap, take } from 'rxjs/operators';
 import { SearchProject } from '../../models/search-project';
 import { NotificationService } from 'src/app/core/notification/notification.service';
+import { ProjectsStoreFacade } from '@app/projects-store/projects.store-facade';
 
 @Component({
   selector: 'app-projects',
@@ -18,7 +19,8 @@ import { NotificationService } from 'src/app/core/notification/notification.serv
 })
 export class ProjectsListComponent implements OnInit, OnDestroy {
 
-  projects$: Observable<Project[]>;
+  projects$ = this.projectsStoreFacade.projects$;
+
   error$: Observable<Project[]>;
   totalProjects$: Observable<number>;
   isUpdating$: Observable<boolean>;
@@ -30,10 +32,10 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
     private projectsFacade: ProjectsFacade,
     private router: Router,
     private exportService: ExportService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private projectsStoreFacade: ProjectsStoreFacade
   ) {
     this.isUpdating$ = projectsFacade.isUpdating$();
-    this.projects$ = projectsFacade.getProjects$();
     this.error$ = projectsFacade.getError$();
     this.totalProjects$ = projectsFacade.getTotalProjects$();
     this.projectsFacade.setPageSize(this.itemsPerPage);
@@ -41,11 +43,11 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.projectsFacade.loadProjects();
+    //this.projectsFacade.loadProjects();
   }
 
   ngOnDestroy() {
-    this.projectsFacade.cleanState();
+    //this.projectsFacade.cleanState();
   }
 
   onAdd() {

@@ -56,15 +56,15 @@ export class ProjectsFacade {
   }
 
   loadProjects() {
-    this.state.projects.setUpdating(true);
-    this.projectsApi.getProjects(this.state.projects.getPage$().value, this.state.projects.getPageSize$().value, this.state.projects.getSortField$().value, this.state.projects.getSortDirection$().value, this.state.projects.getSearch$().value)
-      .pipe(
-        take(1),
-        finalize(() => this.state.projects.setUpdating(false))
-      ).subscribe(
-        (response: HttpResponse<Project[]>) => this.setProjectsState(response.body, +response.headers.get(this.projectsApi.HEADER_TOTAL_ITEMS)),
-        (error) => this.setProjectsErrorState(error),
-      );
+    /*  this.state.projects.setUpdating(true);
+      this.projectsApi.getProjects(this.state.projects.getPage$().value, this.state.projects.getPageSize$().value, this.state.projects.getSortField$().value, this.state.projects.getSortDirection$().value, this.state.projects.getSearch$().value)
+        .pipe(
+          take(1),
+          finalize(() => this.state.projects.setUpdating(false))
+        ).subscribe(
+          (response: HttpResponse<Project[]>) => this.setProjectsState(response.body, +response.headers.get(this.projectsApi.HEADER_TOTAL_ITEMS)),
+          (error) => this.setProjectsErrorState(error),
+        );*/
   }
 
   private setProjectsState(projects: Project[], totalProjects: number) {
@@ -103,7 +103,7 @@ export class ProjectsFacade {
   }
 
   addProject() {
-    this.state.projects.setProject(new Project());
+    //this.state.projects.setProject(new Project());
   }
 
   saveNewProject(project: Project): Observable<Project> {

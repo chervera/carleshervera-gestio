@@ -17,6 +17,10 @@ export class ProjectsApi extends Api {
     super();
   }
 
+  /*getProjects(page: number = 0, pageSize: number = 10, sortField: string = '', sortDirection: string = '', searchProject: SearchProject = null): Observable<Project[]> {
+    return this.http.get<Project[]>(this.API);
+  }*/
+
   getProjects(page: number = 0, pageSize: number = 10, sortField: string = '', sortDirection: string = '', searchProject: SearchProject = null): Observable<HttpResponse<Project[]>> {
     let queryParams = new HttpParams()
       .set('_page', page.toString())

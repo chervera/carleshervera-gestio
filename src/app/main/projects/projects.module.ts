@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ProjectsListComponent } from './containers/projects-list/projects-list.component';
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { ProjectsTableComponent } from './components/projects-table/projects-table.component';
@@ -23,7 +22,11 @@ import { CoreModule } from 'src/app/core/core.module';
 import { ProjectsSearchComponent } from './components/projects-search/projects-search.component';
 import { MasterModule } from '../master/master.module';
 
-
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { ProjectsEffects } from './store/projects-effects';
+import { ProjectsStoreFacade } from '@app/projects-store/projects.store-facade';
+import { reducers } from '@app/projects-store';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,12 @@ import { MasterModule } from '../master/master.module';
     MatSortModule,
     ExportModule,
     UiModule,
-    MasterModule
+    MasterModule,
+    StoreModule.forFeature('projects', reducers),
+    EffectsModule.forFeature([ProjectsEffects])
+  ],
+  providers: [
+    ProjectsStoreFacade
   ]
 })
 export class ProjectsModule { }
