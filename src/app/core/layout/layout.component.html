@@ -2,11 +2,14 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-9">
-        <span class="header__title">Carles Hervera Gestió</span>
+        <span class="header__title">Gestió</span>
       </div>
       <div class="col-3">
         <div class="header__menu">
-          <span class="user">{{(user | async)?.data}}</span>
+          <span class="user__wrapper" *ngIf="(user | async)?.data">
+            <i class="fa fa-user-circle"></i>
+            <span>{{(user | async)?.data}}</span>
+          </span>
           <mat-menu #appMenu="matMenu">
             <button mat-menu-item routerLink="/projectes">Projectes</button>
             <button mat-menu-item routerLink="/articles">Articles</button>

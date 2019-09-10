@@ -34,8 +34,12 @@ https://www.npmjs.com/package/ngx-cacheable
 1. **models** - Esta carpeta es donde irán los modelos que usemos en este modulo. No es necesario tener el modelo de los objetos de la api con la que trabajemos, pero es recomendable y agilizará el desarrollo.
 
 1. **state** - Aquí irá el estado del módulo, en principio solo un fichero aunque si es necesario se crearán mas. Los estados de esta carpeta solo serán usados desde el estado del core. nunca directamente.
+  - **metodos**
+    1. select -> Este metodo lo heredarán de la clase State del paquete core. Sirve para acceder a cualquier propiedad sin tener que declarar el getter, de esta forma el estado queda más sencillo. Solo puede ser usada desde facades.
 
-1. **routing** - Las rutas del modulo. Como mínimo una por container.
+    1. set -> Este metodo lo heredarán de la clase State del paquete core. Sirve para setear a cualquier propiedad sin tener que declarar el setter, de esta forma el estado queda más sencillo. Solo puede ser usada desde facades.
+
+1. **routing** - Las rutas del modulo. Como mínimo una por container si queremos que los modulos sean lazy.
 
 1. **facade** - Este será el servicio que comunica nuestros containers con el estado y la api. Es el que será inyectado a nuestros containers.
 Los metodos que requieran trabajar con obserbables, los devolveran sin ejecutar, solo con pipes de tratamiento de los datos necesarios y así el tratamiento de los errores o de los mensajes de éxito se encargarçan los componentes de vista.
@@ -70,6 +74,8 @@ https://medium.com/@michael.karen/esperando-lo-inesperado-buenas-pr%C3%A1cticas-
 ## Normas de estilo de código
 
 1. - Las funciones que sean llamadas desde eventos de componentes serán nombrarán del tipo on + Accion. ej. onSubmit(), onSave() onDelete().
+
+1. - Las propiedades que sean Obserbables o derivados tendrán el simbolo $ al final del nombre projectes$, projecte$, isUpdating$.
 
 ## TODO:
 

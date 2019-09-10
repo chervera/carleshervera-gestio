@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Project } from '../models/project';
 import { State } from 'src/app/core/state/state';
 import { ResponseError } from 'src/app/core/error-handler/response-error';
@@ -102,10 +102,6 @@ export class ProjectsState extends State {
     this.completed$.error(error);
   }
 
-  getProjects$() {
-    return this.projects$.asObservable();
-  }
-
   setProjects(projects: Project[]) {
     this.projects$.next(projects);
   }
@@ -141,5 +137,7 @@ export class ProjectsState extends State {
   setError(error: Error) {
     return this.error$.next(error);
   }
+
+
 
 }

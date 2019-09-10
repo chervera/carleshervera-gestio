@@ -7,6 +7,7 @@ import { CoreState } from 'src/app/core/state/core.state';
 import { HttpResponse } from '@angular/common/http';
 import { ResponseError } from 'src/app/core/error-handler/response-error';
 import { SearchProject } from './models/search-project';
+import { ProjectsState } from './state/projects.state';
 
 
 
@@ -18,7 +19,13 @@ export class ProjectsFacade {
   constructor(
     private projectsApi: ProjectsApi,
     private state: CoreState
-  ) { }
+  ) {
+    this.cleanState();
+  }
+
+  cleanState(): void {
+    this.state.projects = new ProjectsState();;
+  }
 
   isUpdating$(): Observable<boolean> {
     return this.state.projects.isUpdating$();
@@ -37,9 +44,7 @@ export class ProjectsFacade {
   }
 
   getProjects$(): Observable<Project[]> {
-    // here we just pass the state without any projections
-    // it may happen that it is necessary to combine two or more streams and expose to the components
-    return this.state.projects.getProjects$();
+    return this.state.projects.select('projects$');
   }
 
   getError$(): Observable<any> {

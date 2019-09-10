@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, OnDestroy } from '@angular/core';
 import { ProjectsFacade } from '../../projects.facade';
 import { Observable } from 'rxjs';
 import { Project } from '../../models/project';
@@ -16,7 +16,7 @@ import { NotificationService } from 'src/app/core/notification/notification.serv
   templateUrl: './projects-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProjectsListComponent implements OnInit {
+export class ProjectsListComponent implements OnInit, OnDestroy {
 
   projects$: Observable<Project[]>;
   error$: Observable<Project[]>;
@@ -42,6 +42,10 @@ export class ProjectsListComponent implements OnInit {
 
   ngOnInit() {
     this.projectsFacade.loadProjects();
+  }
+
+  ngOnDestroy() {
+    this.projectsFacade.cleanState();
   }
 
   onAdd() {

@@ -1,18 +1,35 @@
 <div class="page">
-  <mat-card>
-    <mat-card-title>{{ 'articles.title' | translate}}</mat-card-title>
-    <div class="button-wrapper button-wrapper--right">
-      <button mat-flat-button color="primary" (click)="onAdd()">Afegir</button>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="page__header">
+          <div class="page__title">{{ 'articles.title' | translate}}</div>
+          <div class="breadcrums">
+            <span class="breadcrums__item">inici</span>
+            <span class="breadcrums__item">artciles</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="table">
+          <div class="table__header">
+            <div class="button-wrapper">
+              <button (click)="onAdd()" class="button button--primary">Afegir</button>
+            </div>
+          </div>
+          <div class="table__content">
+            <app-articles-table [articles$]="articles$" [totalArticles$]="totalArticles$" [loading$]="isUpdating$"
+              (edit)="editArticle($event)" (delete)="deleteArticle($event)" (sort)="onSort($event)"
+              (paginate)="onPaginate($event)">
+            </app-articles-table>
+          </div>
+        </div>
+        <div class="table__footer">
+          <div class="button-wrapper">
+            <button class="button button--primary" (click)="onExport()">Exportar</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="table">
-      <span class="error">error: {{(error$ | async)?.message}}</span>
-      <app-articles-table [articles$]="articles$" [totalArticles$]="totalArticles$" [loading$]="isUpdating$"
-        (edit)="editArticle($event)" (delete)="deleteArticle($event)" (sort)="onSort($event)"
-        (paginate)="onPaginate($event)">
-      </app-articles-table>
-    </div>
-    <div class="button-wrapper button-wrapper--right">
-      <button mat-flat-button color="primary" (click)="onExport()">Exportar</button>
-    </div>
-  </mat-card>
+  </div>
 </div>

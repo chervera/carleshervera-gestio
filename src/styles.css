@@ -62,7 +62,18 @@ body{
 }
 .header__menu{
   float: right;
+  display: flex;
+  justify-content: space-between;
 }
+.header__menu .user__wrapper{
+  padding: var(--distance-m);
+  margin: 0 var(--distance-l);
+  border-right: 1px solid var(--font-color);
+}
+.header__menu .user__wrapper > * {
+  margin-left: var(--distance-m);
+}
+
 
 .menu{
   background: none;

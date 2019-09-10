@@ -18,7 +18,7 @@ export class CoreState extends State {
   auth: AuthState = new AuthState();
   master: MasterState = new MasterState();
   articles: ArticlesState = new ArticlesState();
-  projects: ProjectsState = new ProjectsState();
+  projects: ProjectsState;
 
 
   printGlobalState() {

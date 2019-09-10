@@ -1,44 +1,82 @@
 <div class="page">
-  <mat-card>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="page__header">
+          <div class="page__title">{{ 'projects.edit' | translate}}</div>
+          <div class="breadcrums">
+            <span class="breadcrums__item">inici</span>
+            <a routerLink="/projectes" class="breadcrums__item">projectes</a>
+            <span class="breadcrums__item">projectes</span>
+          </div>
+        </div>
+      </div>
+    </div>
     <form *ngIf="article$ | async" [formGroup]="form" (ngSubmit)="onSubmit()">
-      <mat-card-title>Edició Article</mat-card-title>
-      <mat-card-content>
-        <mat-form-field class="form__field-container">
-          <input matInput placeholder="Títol" id="title" formControlName="title">
-          <mat-input-error [control]="form.controls.title" [apiError]="(formApiErrors$ | async)?.title">
-          </mat-input-error>
-        </mat-form-field>
-        <mat-form-field class="form__field-container">
-          <input matInput placeholder="Descripció curta" id="short_description" formControlName="short_description">
-          <mat-input-error [control]="form.controls.short_description"
-            [apiError]="(formApiErrors$ | async)?.short_description">
-          </mat-input-error>
-        </mat-form-field>
-        <mat-form-field class="form__field-container">
-          <textarea matInput placeholder="Contingut" id="description" formControlName="description"></textarea>
-        </mat-form-field>
-        <mat-form-field class="form__field-container">
-          <input matInput [matDatepicker]="created_on" placeholder="Data d'inserció">
-          <mat-datepicker-toggle matSuffix [for]="created_on"></mat-datepicker-toggle>
-          <mat-datepicker #created_on></mat-datepicker>
-        </mat-form-field>
-        <div class="form__field-container">
-          <mat-checkbox matInput formControlName="active">Actiu</mat-checkbox>
+      <div class="form">
+        <div class="form__header">
+          <div class="button-wrapper">
+            <button class="button button--primary" (click)="onSubmit()">Guardar</button>
+            <button class="button button--error" (click)="onCancel()">Cancelar</button>
+          </div>
         </div>
-        <mat-form-field class="form__field-container">
-          <input matInput placeholder="Slug" id="slug" formControlName="slug">
-        </mat-form-field>
-        <mat-form-field class="form__field-container">
-          <mat-label>Etiquetes</mat-label>
-          <mat-select formControlName="tags" multiple>
-            <mat-option *ngFor="let tag of tags$ | async" [value]="tag.id">{{tag.name}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <div class="button-wrapper button-wrapper--right">
-          <button mat-flat-button color="primary">Guardar</button>
-          <button mat-flat-button color="warn" (click)="onCancel()">Cancelar</button>
+        <div class="form__content">
+          <div class="row">
+            <div class="col-3">
+              <mat-form-field class="field-container">
+                <input matInput placeholder="Títol" id="title" formControlName="title">
+                <app-input-error [control]="form.controls.title" [apiError]="(formApiErrors$ | async)?.title">
+                </app-input-error>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="field-container">
+                <input matInput placeholder="Descripció curta" id="short_description"
+                  formControlName="short_description">
+                <app-input-error [control]="form.controls.short_description"
+                  [apiError]="(formApiErrors$ | async)?.short_description">
+                </app-input-error>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="field-container">
+                <textarea matInput placeholder="Contingut" id="description" formControlName="description"></textarea>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="field-container">
+                <input matInput [matDatepicker]="created_on" placeholder="Data d'inserció">
+                <mat-datepicker-toggle matSuffix [for]="created_on"></mat-datepicker-toggle>
+                <mat-datepicker #created_on></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <div class="field-container">
+                <mat-checkbox matInput formControlName="active">Actiu</mat-checkbox>
+              </div>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="field-container">
+                <input matInput placeholder="Slug" id="slug" formControlName="slug">
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="field-container">
+                <mat-label>Etiquetes</mat-label>
+                <mat-select formControlName="tags" multiple>
+                  <mat-option *ngFor="let tag of tags$ | async" [value]="tag.id">{{tag.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form__footer">
+            <div class="button-wrapper">
+              <button class="button button--primary" (click)="onSubmit()">Guardar</button>
+              <button class="button button--error" (click)="onCancel()">Cancelar</button>
+            </div>
+          </div>
         </div>
-      </mat-card-content>
+      </div>
     </form>
-  </mat-card>
+  </div>
 </div>
