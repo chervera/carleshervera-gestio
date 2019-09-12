@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Project } from '../../models/project';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ProjectsFacade } from '../../projects.facade';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -10,6 +10,7 @@ import { MasterFacade } from 'src/app/main/master/master.facade';
 import { Master } from 'src/app/main/master/models/master';
 import { NotificationService } from 'src/app/core/notification/notification.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ProjectsStoreFacade } from '@app/projects-store/projects.store-facade';
 
 
 @Component({
@@ -19,7 +20,11 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ProjectsFormComponent implements OnInit {
 
-  project$: Observable<Project>;
+  project$ = this.route.params.pipe(
+    map(params => params.id),
+    switchMap(id => this.projectsStoreFacade.getProjectById(id)),
+  );
+
   departments$: Observable<Master[]>;
   formApiErrors$: Observable<ResponseError>
 
@@ -32,6 +37,7 @@ export class ProjectsFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private projectsFacade: ProjectsFacade,
+    private projectsStoreFacade: ProjectsStoreFacade,
     private masterFacade: MasterFacade,
     private formBuilder: FormBuilder,
     private notificationService: NotificationService,
@@ -45,7 +51,11 @@ export class ProjectsFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initProject();
+    //this.initProject();
+    this.route.params.subscribe(params => {
+      // update our id from the backend in case it was modified by another client
+      this.projectsStoreFacade.loadProject(+params.id);
+    });
     this.initMasters();
     this.initForm();
     this.isCompletedSubscription();
