@@ -1,13 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Project } from '../../models/project';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ProjectsFacade } from '../../projects.facade';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { ResponseError } from 'src/app/core/error-handler/response-error';
-import { MasterFacade } from 'src/app/main/master/master.facade';
-import { Master } from 'src/app/main/master/models/master';
+import { MasterFacade } from '@app/core/master/master.facade';
+import { Master } from '@app/core/master/models/master';
 import { NotificationService } from 'src/app/core/notification/notification.service';
 import { TranslateService } from '@ngx-translate/core';
 

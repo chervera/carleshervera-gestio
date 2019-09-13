@@ -1,15 +1,15 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, OnDestroy } from '@angular/core';
-import { ProjectsFacade } from '../../projects.facade';
 import { Observable } from 'rxjs';
 import { Project } from '../../models/project';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import { ExportService } from 'src/app/shared/export/export.service';
+import { ExportService } from '@app/core/export/export.service';
 import { ProjectsTableComponent } from '../../components/projects-table/projects-table.component';
 import { tap, take } from 'rxjs/operators';
 import { SearchProject } from '../../models/search-project';
-import { NotificationService } from 'src/app/core/notification/notification.service';
+import { NotificationService } from '@app/core/notification/notification.service';
+import { ProjectsFacade } from '../../projects.facade';
 
 @Component({
   selector: 'app-projects',

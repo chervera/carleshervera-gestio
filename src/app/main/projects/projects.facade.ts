@@ -11,9 +11,7 @@ import { ProjectsState } from './state/projects.state';
 
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProjectsFacade {
 
   constructor(

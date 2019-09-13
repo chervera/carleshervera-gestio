@@ -5,7 +5,7 @@ import { Article } from '../../models/article';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import { ExportService } from 'src/app/shared/export/export.service';
+import { ExportService } from '@app/core/export/export.service';
 import { ArticlesTableComponent } from '../../components/articles-table/articles-table.component';
 import { tap, take } from 'rxjs/operators';
 

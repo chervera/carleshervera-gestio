@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ProjectsListComponent } from './containers/projects-list/projects-list.component';
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { ProjectsTableComponent } from './components/projects-table/projects-table.component';
@@ -16,12 +15,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { ExportModule } from 'src/app/shared/export/export.module';
+import { ExportModule } from '@app/core/export/export.module';
 import { UiModule } from 'src/app/shared/ui/ui.module';
-import { MatSelectModule, MatSelect } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { CoreModule } from 'src/app/core/core.module';
 import { ProjectsSearchComponent } from './components/projects-search/projects-search.component';
-import { MasterModule } from '../master/master.module';
+import { MasterModule } from '@app/core/master/master.module';
+import { ProjectsFacade } from './projects.facade';
 
 
 
@@ -52,6 +52,9 @@ import { MasterModule } from '../master/master.module';
     ExportModule,
     UiModule,
     MasterModule
+  ],
+  providers: [
+    ProjectsFacade
   ]
 })
 export class ProjectsModule { }
