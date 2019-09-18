@@ -22,7 +22,7 @@ export class ProjectsFacade {
   }
 
   cleanState(): void {
-    this.state.projects = new ProjectsState();;
+    this.state.projects = new ProjectsState();
   }
 
   isUpdating$(): Observable<boolean> {

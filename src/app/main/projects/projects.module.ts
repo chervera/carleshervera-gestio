@@ -3,7 +3,6 @@ import { ProjectsListComponent } from './containers/projects-list/projects-list.
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { ProjectsTableComponent } from './components/projects-table/projects-table.component';
 import { MatTableModule } from '@angular/material/table';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { ProjectsFormComponent } from './containers/projects-form/projects-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -38,7 +37,6 @@ import { ProjectsFacade } from './projects.facade';
     ProjectsRoutingModule,
     ReactiveFormsModule,
     MatTableModule,
-    MatProgressSpinnerModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,

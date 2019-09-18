@@ -10,6 +10,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatMenuModule,
     MatIconModule,
     MatNativeDateModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {
@@ -36,6 +38,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     CommonModule,
     TranslateModule,
     LayoutComponent,
+    MatProgressSpinnerModule
   ]
 })
 export class CoreModule { }

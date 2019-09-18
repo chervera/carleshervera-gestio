@@ -3,18 +3,9 @@ import { CommonModule } from '@angular/common';
 import { InputErrorComponent } from './input-error/input-error.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-
-
 @NgModule({
-  declarations: [
-    InputErrorComponent
-  ],
-  imports: [
-    CommonModule,
-    MatFormFieldModule
-  ],
-  exports: [
-    InputErrorComponent
-  ]
+  declarations: [InputErrorComponent],
+  imports: [CommonModule, MatFormFieldModule],
+  exports: [InputErrorComponent]
 })
-export class UiModule { }
+export class UiModule {}

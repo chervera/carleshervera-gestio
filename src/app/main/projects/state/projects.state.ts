@@ -5,9 +5,6 @@ import { State } from 'src/app/core/state/state';
 import { ResponseError } from 'src/app/core/error-handler/response-error';
 import { SearchProject } from '../models/search-project';
 
-@Injectable({
-  providedIn: 'root'
-})
 export class ProjectsState extends State {
 
   readonly NOT_COMPLETED = null;
