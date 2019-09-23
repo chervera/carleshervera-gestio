@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, OnDestroy } from '@angular/core';
-import { ProjectsFacade } from '../../projects.facade';
 import { Observable } from 'rxjs';
 import { Project } from '../../models/project';
 import { Router } from '@angular/router';
@@ -15,10 +14,9 @@ import { ProjectsStoreFacade } from '@app/projects-store/projects.store-facade';
 @Component({
   selector: 'app-projects',
   templateUrl: './projects-list.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsListComponent implements OnInit, OnDestroy {
-
   projects$ = this.projectsStoreFacade.projects$;
 
   error$: Observable<Project[]>;
@@ -29,17 +27,16 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
   @ViewChild(ProjectsTableComponent, { static: true }) projectsTable: ProjectsTableComponent;
 
   constructor(
-    private projectsFacade: ProjectsFacade,
+    private projectsFacade: ProjectsStoreFacade,
     private router: Router,
     private exportService: ExportService,
     private notificationService: NotificationService,
-    private projectsStoreFacade: ProjectsStoreFacade
+    private projectsStoreFacade: ProjectsStoreFacade,
   ) {
-    this.isUpdating$ = projectsFacade.isUpdating$();
-    this.error$ = projectsFacade.getError$();
-    this.totalProjects$ = projectsFacade.getTotalProjects$();
-    this.projectsFacade.setPageSize(this.itemsPerPage);
-
+    //this.isUpdating$ =
+    //this.error$ = projectsFacade.getError$();
+    //this.totalProjects$ = projectsFacade.getTotalProjects$();
+    //this.projectsFacade.setPageSize(this.itemsPerPage);
   }
 
   ngOnInit() {
@@ -55,13 +52,15 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
   }
 
   onExport() {
-    this.projects$.pipe(
-      take(1),
-      tap((data: Project[]) => {
-        const preparedToExport = this.exportService.prepareToExport(data, this.projectsTable.dataColumns);
-        this.exportService.exportAsExcelFile(preparedToExport, 'name-of-the-file');;
-      })
-    ).subscribe();
+    this.projects$
+      .pipe(
+        take(1),
+        tap((data: Project[]) => {
+          const preparedToExport = this.exportService.prepareToExport(data, this.projectsTable.dataColumns);
+          this.exportService.exportAsExcelFile(preparedToExport, 'name-of-the-file');
+        }),
+      )
+      .subscribe();
   }
 
   editProject(id: number) {
@@ -69,29 +68,26 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
   }
 
   deleteProject(id: number) {
-    this.projectsFacade.deleteProject(id).subscribe(
-      () => this.notificationService.showSuccess('Eliminat correctament'),
-    );
+    //this.projectsFacade.deleteProject(id).subscribe(() => this.notificationService.showSuccess('Eliminat correctament'));
   }
 
   onPaginate(page: PageEvent) {
-    this.projectsFacade.setPage(page.pageIndex);
-    this.projectsFacade.setPageSize(page.pageSize);
-    this.projectsFacade.loadProjects();
+    //this.projectsFacade.setPage(page.pageIndex);
+    //this.projectsFacade.setPageSize(page.pageSize);
+    //this.projectsFacade.loadProjects();
   }
 
   onSort(sort: Sort) {
-    this.projectsFacade.setSortField(sort.active);
-    this.projectsFacade.setSortDirection(sort.direction);
-    this.projectsFacade.loadProjects();
+    //this.projectsFacade.setSortField(sort.active);
+    //this.projectsFacade.setSortDirection(sort.direction);
+    //this.projectsFacade.loadProjects();
   }
 
   onSearch(search: SearchProject) {
-    this.projectsFacade.setSearch(search);
+    /*this.projectsFacade.setSearch(search);
     this.projectsFacade.setSortField(null);
     this.projectsFacade.setSortDirection(null);
     this.projectsFacade.setInitPage();
-    this.projectsFacade.loadProjects();
+    this.projectsFacade.loadProjects();*/
   }
-
 }

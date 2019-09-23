@@ -5,12 +5,10 @@ import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { SearchProject } from '../models/search-project';
 import { Api } from 'src/app/core/auth/api/api';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectsApi extends Api {
-
   readonly API = this.URL_API + 'projects';
 
   constructor(private http: HttpClient) {
@@ -22,9 +20,7 @@ export class ProjectsApi extends Api {
   }*/
 
   getProjects(page: number = 0, pageSize: number = 10, sortField: string = '', sortDirection: string = '', searchProject: SearchProject = null): Observable<HttpResponse<Project[]>> {
-    let queryParams = new HttpParams()
-      .set('_page', page.toString())
-      .set('_rows', pageSize.toString());
+    let queryParams = new HttpParams().set('_page', page.toString()).set('_rows', pageSize.toString());
     //.set('sort', sortField)
     //.set('direction', sortDirection);
     if (searchProject) {
@@ -32,7 +28,7 @@ export class ProjectsApi extends Api {
     }
     const options = {
       observe: 'response' as 'body',
-      params: queryParams
+      params: queryParams,
     };
 
     return this.http.get<HttpResponse<Project[]>>(this.API, options);
@@ -55,7 +51,7 @@ export class ProjectsApi extends Api {
     return this.http.post<Project>(this.API, project);
   }
 
-  update(project: Project): Observable<Project> {
+  update(project: Partial<Project>): Observable<Project> {
     return this.http.put<Project>(this.API, project);
   }
 

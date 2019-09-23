@@ -2,8 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Project } from '../../models/project';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { ProjectsFacade } from '../../projects.facade';
+import { Observable, Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ResponseError } from 'src/app/core/error-handler/response-error';
 import { MasterFacade } from 'src/app/main/master/master.facade';
@@ -11,51 +10,51 @@ import { Master } from 'src/app/main/master/models/master';
 import { NotificationService } from 'src/app/core/notification/notification.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ProjectsStoreFacade } from '@app/projects-store/projects.store-facade';
-
+import { ProjectsEffects } from '@app/projects-store/projects-effects';
 
 @Component({
   selector: 'app-projects-form',
   templateUrl: './projects-form.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsFormComponent implements OnInit {
-
-  project$ = this.route.params.pipe(
-    map(params => params.id),
-    switchMap(id => this.projectsStoreFacade.getProjectById(id)),
-  );
-
   departments$: Observable<Master[]>;
-  formApiErrors$: Observable<ResponseError>
+  formApiErrors$: Observable<ResponseError>;
 
   isUpdating$: Observable<boolean>;
   isCompleted$: Observable<string>;
 
+  project$: Observable<Project>;
+
   form: FormGroup;
+  redirectSub: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private projectsFacade: ProjectsFacade,
-    private projectsStoreFacade: ProjectsStoreFacade,
+    private projectsFacade: ProjectsStoreFacade,
     private masterFacade: MasterFacade,
     private formBuilder: FormBuilder,
     private notificationService: NotificationService,
-    private translateService: TranslateService
-
+    private translateService: TranslateService,
+    private projectsEffects: ProjectsEffects,
   ) {
-    this.isUpdating$ = projectsFacade.isUpdating$();
-    this.project$ = this.projectsFacade.getProject$();
-    this.departments$ = this.masterFacade.getDepartments$()
+    /*this.isUpdating$ = projectsFacade.isUpdating$();
+    this.departments$ = this.masterFacade.getDepartments$();
     this.isCompleted$ = this.projectsFacade.isCompleted$();
+    */
   }
 
   ngOnInit() {
     //this.initProject();
     this.route.params.subscribe(params => {
       // update our id from the backend in case it was modified by another client
-      this.projectsStoreFacade.loadProject(+params.id);
+      this.projectsFacade.loadProject(+params.id);
+      this.project$ = this.projectsFacade.getProjectById(params.id);
     });
+
+    this.redirectSub = this.projectsEffects.update$.subscribe(action => this.router.navigate(['/projectes']));
+
     this.initMasters();
     this.initForm();
     this.isCompletedSubscription();
@@ -63,27 +62,15 @@ export class ProjectsFormComponent implements OnInit {
   }
 
   private errorFormSubscription() {
-    this.formApiErrors$ = this.projectsFacade.getFormError$();
+    //this.formApiErrors$ = this.projectsFacade.getFormError$();
   }
 
   private isCompletedSubscription() {
-    this.projectsFacade.initCompleted();
-    this.isCompleted$.pipe(
-      filter(data => data != null)
-    ).subscribe(
-      (message) => {
-        this.goToList();
-      }
-    );
-  }
-
-  private initProject() {
-    this.projectsFacade.setSelectedId(+this.route.snapshot.paramMap.get('id'));
-    if (this.projectsFacade.getSelectedId()) {
-      this.loadProject(this.projectsFacade.getSelectedId());
-    } else {
-      this.newProject();
-    }
+    /*this.projectsFacade.initCompleted();
+    this.isCompleted$.pipe(filter(data => data != null)).subscribe(message => {
+      this.goToList();
+    });
+    */
   }
 
   private initMasters() {
@@ -94,7 +81,7 @@ export class ProjectsFormComponent implements OnInit {
     this.form = this.buildForm();
     this.project$.subscribe(project => {
       if (project) {
-        this.form.patchValue(project)
+        this.form.patchValue(project);
       }
     });
   }
@@ -104,19 +91,16 @@ export class ProjectsFormComponent implements OnInit {
   }
 
   newProject() {
-    this.projectsFacade.addProject();
+    //this.projectsFacade.addProject();
   }
 
   saveNewProject(project: Project) {
-    this.projectsFacade.saveNewProject(project).subscribe(
-      () => this.notificationService.showSuccess(this.translateService.instant('projects.messages.insert.sucess'))
-    );
+    //this.projectsFacade.saveNewProject(project).subscribe(() => this.notificationService.showSuccess(this.translateService.instant('projects.messages.insert.sucess')));
   }
 
   saveUpdateProject(project: Project) {
-    this.projectsFacade.saveUpdateProject(project).subscribe(
-      () => this.notificationService.showSuccess(this.translateService.instant('projects.messages.update.sucess'))
-    )
+    //this.projectsFacade.saveUpdateProject(project).subscribe(() => this.notificationService.showSuccess(this.translateService.instant('projects.messages.update.sucess')));
+    this.projectsFacade.updateProject(project);
   }
 
   saveProject() {
@@ -144,6 +128,7 @@ export class ProjectsFormComponent implements OnInit {
 
   private buildForm() {
     return this.formBuilder.group({
+      id: [''],
       code: [''],
       name: [''],
       responsable: [''],
@@ -185,8 +170,6 @@ export class ProjectsFormComponent implements OnInit {
 
   private getEditedProject(): Project {
     let project: Project = this.form.value;
-    project.id = this.projectsFacade.getSelectedId();
     return project;
   }
-
 }
