@@ -4,19 +4,14 @@ import { AuthService } from '../service/auth.service';
 import { take, switchMap } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(): Observable<boolean> {
-    return this.authService.isLoggedIn$().pipe(
+    return this.authService.isLoggedIn().pipe(
       take(1),
       switchMap(isLoggedIn => {
         if (!isLoggedIn) {

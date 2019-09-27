@@ -8,15 +8,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ### módulo core
 
-En el módulo core se pondrá todo lo que vayan a usar la mayoría de modulos. Es un módulo que será cargado en el componente main, por lo que siempre estará disponible y será cargado al arranque de la aplicación.
-Los servicios o que deban usar mas de un modulo va a estar aquí.
+En el módulo core se pondrá todo lo que vayan a usar la mayoría de modulos. Es un módulo que será cargado en el componente features, por lo que siempre estará disponible y será cargado al arranque de la aplicación.
+Los servicios que se deban usar en mas de un modulo va a estar aquí.
 
 ### carpeta shared
 
 Aquí irán incluídos todos los módulos que no serán cargados automaticamente con la aplicación. Són modulos o herramientas que los modulos de la carpeta main importaran si los necesitan.
-Solo habrán componentes en este modulo, y estos no podrán tener dependencias con los sevicios de core.
+Solo habrán componentes que no tengan dependencias con servicios del core o de features.
 
-### carpeta main
+### carpeta features
 
 Aquí es donde distribuiremos todos los modulos del negocio de la aplicación.
 
@@ -27,7 +27,7 @@ Los módulos de negocio estarán compuestos de las siguientes carpetas:
 1. **api** - En esta carpeta se encontrarán los servicios de acceso a la api si el modulo en cuestión acceda a alguna api. Si la petición a la api es cacheable se usará el decorador Cacheable
    https://www.npmjs.com/package/ngx-cacheable
 
-1. **components** - En esta carpeta irán los componentes "tontos". Serán componentes puros, que solo accederán a datos que les entren por @Inputs. De esta forma serán muy reutilizables, mantenibles y facilmente testeables. Los que creamos necesarios, serán exportados para que otros modulos los puedan usar. Es obligatorio poner la detección de cambios en onPush ChangeDetectionStrategy.OnPush
+1. **components** - En esta carpeta irán los componentes "tontos". Serán componentes puros, que solo accederán a datos que les entren por @Inputs. De esta forma serán muy reutilizables, mantenibles y facilmente testeables. Los que creamos necesarios, serán exportados para que otros modulos los puedan usar. Es obligatorio poner la detección de cambios en onPush ChangeDetectionStrategy.OnPush https://medium.com/@ltciro/entendiendo-change-detection-en-angular-parte-2-estrategia-on-push-cb7894bb2fb3
 
 1. **containers** - Aquí se encontrarán los módulos "listos". Estos serán los modulos a los que una ruta del routing apuntará. Ellos se encargarán de gestionar los servicios necesarios para que los sub componentes puedan acceder a los datos necesario. Iniciarán o reiniciaran el estado y consultarán la api.
 
@@ -94,7 +94,7 @@ https://medium.com/@michael.karen/esperando-lo-inesperado-buenas-pr%C3%A1cticas-
 ## TODO:
 
 1. - The JWT authentication - Done
-1. - Fer que guardi el token en una cookie un ratet
+   1. - Fer que guardi el token en una cookie un ratet
 1. - A HTML layout - refer-lo per a que moli una mica més - Done
 1. - Bootstrap 4 - Done
 1. - Icon font
@@ -108,14 +108,15 @@ https://medium.com/@michael.karen/esperando-lo-inesperado-buenas-pr%C3%A1cticas-
 1. - Handle errors.
    1. - Falta fer el loggin service, però s'ha de definir un "back" on cridar.
 1. - Export xls service.
-1. - Make the service - Done
-1. - Improve the service.
-1. - Convert state into inmutable state
+   1. - Make the service - Done
+   1. - Improve the service.
+1. - Convert state into inmutable state - DONE - https://netbasal.gitbook.io/akita/entity-store/entity-store/api
+
 1. - Finish and add the module generation schematics.
-1. - Create crud module
-1. - Create form from model
-1. - Create table from model
-1. - Create translation from model
+   1. - Create crud module
+   1. - Create form from model
+   1. - Create table from model
+   1. - Create translation from model
 1. - Example test
 1. - i18n - Done
 
@@ -135,6 +136,8 @@ https://material.angular.io/
 https://angular-academy.com/angular-jwt/
 
 https://github.com/ngx-translate/core
+
+https://medium.com/@ltciro/entendiendo-change-detection-en-angular-parte-2-estrategia-on-push-cb7894bb2fb3
 
 ## Utilities
 

@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
+import { snapshotManager } from '@datorama/akita';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoggingService {
+  constructor() {}
 
   logError(message: string, stack: string) {
     // Send errors to be saved here
     // The console.log is only for testing this example.
-    console.log('LoggingService: ' + message);
+    console.log('LoggingService Snapshot: ');
+    console.log(snapshotManager.getStoresSnapshot());
   }
 }

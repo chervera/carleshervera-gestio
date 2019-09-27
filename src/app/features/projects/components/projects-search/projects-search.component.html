@@ -1,0 +1,24 @@
+<div class="searcher">
+  <div class="searcher__header">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-3">
+          <mat-form-field class="field-container">
+            <input matInput placeholder="Codi CTTI" id="code" formControlName="code" name="code">
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field class="field-container">
+            <input matInput placeholder="Nom" id="name" formControlName="name" name="name">
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="searcher__footer">
+    <div class="button-wrapper">
+      <button class="button button--primary" (click)="onSearch()">{{ 'button.search' | translate}}</button>
+      <button class="button button--primary" (click)="onReset()">{{ 'button.reset' | translate}}</button>
+    </div>
+  </div>
+</div>

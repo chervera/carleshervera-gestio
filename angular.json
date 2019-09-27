@@ -118,5 +118,8 @@
       }
     }
   },
-  "defaultProject": "carleshervera-gestio"
+  "defaultProject": "carleshervera-gestio",
+  "cli": {
+    "defaultCollection": "@datorama/akita"
+  }
 }

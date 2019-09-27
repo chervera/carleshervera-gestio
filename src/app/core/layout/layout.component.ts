@@ -1,38 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { State } from '../state/state';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/service/auth.service';
-import { CoreState } from '../state/core.state';
 import { Router } from '@angular/router';
-
+import { RootQuery } from '../state/root.query';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css']
+  styleUrls: ['./layout.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutComponent implements OnInit {
-
-  user: Observable<any> = null;
+  user$: Observable<any> = null;
 
   constructor(
-    private state: CoreState,
+    private rootQuery: RootQuery,
     private service: AuthService,
     private router: Router
   ) {
-    this.user = service.getUser$();
+    this.user$ = this.rootQuery.selectUser();
   }
 
-  ngOnInit() {
-  }
-
-  printState() {
-    this.state.printGlobalState();
-  }
+  ngOnInit() {}
 
   logout() {
     this.service.logout();
-    this.router.navigate(['user/login'])
+    this.router.navigate(['user/login']);
   }
-
 }

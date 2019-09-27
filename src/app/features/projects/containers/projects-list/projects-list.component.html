@@ -1,0 +1,39 @@
+<div class="page">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="page__header">
+          <div class="page__title">{{ 'projects.title' | translate}}</div>
+          <div class="breadcrums">
+            <span class="breadcrums__item">inici</span>
+            <span class="breadcrums__item">projectes</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="table">
+          <div class="table__header">
+            <span class="table__title">{{ 'projects.search' | translate}}</span>
+            <div class="button-wrapper">
+              <button (click)="onAdd()" class="button button--primary">Afegir</button>
+            </div>
+          </div>
+          <div class="table__searcher">
+            <app-projects-search (search)="onSearch($event)" (reset)="onReset()"></app-projects-search>
+          </div>
+          <div class="table__content">
+            <app-projects-table [projects$]="projects$" [totalProjects$]="totalProjects$" [loading$]="isUpdating$"
+              (edit)="editProject($event)" (delete)="deleteProject($event)" (sort)="onSort($event)"
+              (paginate)="onPaginate($event)">
+            </app-projects-table>
+          </div>
+          <div class="table__footer">
+            <div class="button-wrapper">
+              <button class="button button--primary" (click)="onExport()">Exportar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
